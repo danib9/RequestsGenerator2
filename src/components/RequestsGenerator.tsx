@@ -333,6 +333,17 @@ const RequestsGenerator: React.FC = () => {
         
         return `https://api.sportradar.com/${sportType.toLowerCase()}/trial/v3/en/schedules/${formattedDate}/summaries.json?start=200&limit=200&api_key=hdq7wcu8xkavawwtjjgp2hpp`;
       }
+      
+      // For SportRadar Sport Event, build the URL with sport event ID
+      if (requestType === 'sport-event') {
+        const sportEventId = formData['sr:sport_event'];
+        
+        if (!sportEventId) {
+          return null;
+        }
+        
+        return `https://api.sportradar.us/tennis/trial/v3/en/sport_events/${sportEventId}/timeline.json?api_key=hdq7wcu8xkavawwtjjgp2hpp`;
+      }
     }
 
     return null;

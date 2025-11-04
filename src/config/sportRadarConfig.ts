@@ -44,5 +44,20 @@ export const sportRadarRequestTypesConfig: SportRadarRequestConfig[] = [
         placeholder: 'Select date'
       }
     ]
+  },
+  {
+    id: 'sport-event',
+    label: 'Sport Event',
+    baseUrl: 'https://api.sportradar.us',
+    parameters: [
+      {
+        key: 'sr:sport_event',
+        label: 'Sport Event',
+        type: 'text',
+        required: true,
+        category: 'shared',
+        placeholder: 'Enter Sport Event ID'
+      }
+    ]
   }
 ];
