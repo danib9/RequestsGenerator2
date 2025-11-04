@@ -342,7 +342,7 @@ const RequestsGenerator: React.FC = () => {
           return null;
         }
         
-        return `https://api.sportradar.us/tennis/trial/v3/en/sport_events/${sportEventId}/timeline.json?api_key=hdq7wcu8xkavawwtjjgp2hpp`;
+        return `https://api.sportradar.us/tennis/trial/v3/en/sport_events/sr:sport_event:${sportEventId}/timeline.json?api_key=hdq7wcu8xkavawwtjjgp2hpp`;
       }
     }
 
