@@ -862,6 +862,142 @@ export const requestTypesConfig: Record<string, RequestTypeConfig[]> = {
   ],
   Competition: [
     {
+      id: 'competition-dashboard-light',
+      label: 'Competition dashboard (light)',
+      baseUrl: 'https://mobileapi.365scores.com',
+      endpoint: '/Data/Dashboard/Light/',
+      parameters: [
+        {
+          key: 'competitions',
+          label: 'Competition ID',
+          type: 'text',
+          required: true,
+          category: 'unique',
+          placeholder: 'Enter Competition ID'
+        },
+        {
+          key: 'sections',
+          label: 'Section',
+          type: 'select',
+          required: true,
+          category: 'unique',
+          options: [
+            { value: 'Games', label: 'Games' },
+            { value: 'Scores', label: 'Scores' },
+            { value: 'News', label: 'News' },
+            { value: 'Buzz', label: 'Buzz' },
+            { value: 'Social', label: 'Social' },
+            { value: 'Brackets', label: 'Brackets' },
+            { value: 'Standings', label: 'Standings' },
+            { value: 'PlayersStats', label: 'Players Stats' },
+            { value: 'TeamsStats', label: 'Teams Stats' },
+            { value: 'CompetitionsStats', label: 'Competitions Stats' },
+            { value: 'Highlights', label: 'Highlights' },
+            { value: 'Videos', label: 'Videos' },
+            { value: 'Teams', label: 'Teams' },
+            { value: 'History', label: 'History' },
+            { value: 'DrawingOpponents', label: 'Drawing Opponents' }
+          ]
+        },
+        {
+          key: 'apptype',
+          label: 'App Type',
+          type: 'select',
+          required: true,
+          category: 'core',
+          options: [
+            { value: '1', label: 'iOS' },
+            { value: '2', label: 'Android' },
+            { value: '3', label: 'Web' }
+          ]
+        },
+        {
+          key: 'appversion',
+          label: 'App Version',
+          type: 'text',
+          required: true,
+          category: 'core',
+          placeholder: 'Enter App Version (e.g., 9.9.9)'
+        },
+        {
+          key: 'storeversion',
+          label: 'Store Version',
+          type: 'text',
+          required: true,
+          category: 'core',
+          placeholder: 'Enter Store Version (e.g., 9.9.9)'
+        }
+      ]
+    },
+    {
+      id: 'competition-dashboard',
+      label: 'Competition dashboard',
+      baseUrl: 'https://mobileapi.365scores.com',
+      endpoint: '/Data/Dashboard/',
+      parameters: [
+        {
+          key: 'competitions',
+          label: 'Competition ID',
+          type: 'text',
+          required: true,
+          category: 'unique',
+          placeholder: 'Enter Competition ID'
+        },
+        {
+          key: 'sections',
+          label: 'Section',
+          type: 'select',
+          required: true,
+          category: 'unique',
+          options: [
+            { value: 'Games', label: 'Games' },
+            { value: 'Scores', label: 'Scores' },
+            { value: 'News', label: 'News' },
+            { value: 'Buzz', label: 'Buzz' },
+            { value: 'Social', label: 'Social' },
+            { value: 'Brackets', label: 'Brackets' },
+            { value: 'Standings', label: 'Standings' },
+            { value: 'PlayersStats', label: 'Players Stats' },
+            { value: 'TeamsStats', label: 'Teams Stats' },
+            { value: 'CompetitionsStats', label: 'Competitions Stats' },
+            { value: 'Highlights', label: 'Highlights' },
+            { value: 'Videos', label: 'Videos' },
+            { value: 'Teams', label: 'Teams' },
+            { value: 'History', label: 'History' },
+            { value: 'DrawingOpponents', label: 'Drawing Opponents' }
+          ]
+        },
+        {
+          key: 'apptype',
+          label: 'App Type',
+          type: 'select',
+          required: true,
+          category: 'core',
+          options: [
+            { value: '1', label: 'iOS' },
+            { value: '2', label: 'Android' },
+            { value: '3', label: 'Web' }
+          ]
+        },
+        {
+          key: 'appversion',
+          label: 'App Version',
+          type: 'text',
+          required: true,
+          category: 'core',
+          placeholder: 'Enter App Version (e.g., 9.9.9)'
+        },
+        {
+          key: 'storeversion',
+          label: 'Store Version',
+          type: 'text',
+          required: true,
+          category: 'core',
+          placeholder: 'Enter Store Version (e.g., 9.9.9)'
+        }
+      ]
+    },
+    {
       id: 'competition-dashboard',
       label: 'Competition Dashboard (Light)',
       baseUrl: 'https://mobileapi.365scores.com',
