@@ -914,6 +914,38 @@ export const requestTypesConfig: Record<string, RequestTypeConfig[]> = {
           { value: 'light', label: 'Light' },
           { value: 'dark', label: 'Dark' }
         ]},
+         { 
+          key: 'sections', 
+          label: 'Sections', 
+          placeholder: 'Select section', 
+          type: 'select',
+          category: 'shared',
+          alias: 'Sections',
+          options: [
+            { value: 'Games', label: 'Games' },
+            { value: 'Outrights', label: 'Outrights' },
+            { value: 'PlayersStats', label: 'Players Stats' },
+            { value: 'TeamsStats', label: 'Teams Stats' },
+            { value: 'Details', label: 'Details' },
+            { value: 'MATCHES', label: 'Matches' },
+            { value: 'Standings', label: 'Standings' },
+            { value: 'Trophies', label: 'Trophies' },
+            { value: 'News', label: 'News' },
+            { value: 'SOCIAL', label: 'Social' },
+            { value: 'Chat', label: 'Chat' },
+            { value: 'Transfers', label: 'Transfers' },
+            { value: 'SQUAD', label: 'Squad' },
+            { value: 'Highlights', label: 'Highlights' },
+            { value: 'Scores', label: 'Scores' },
+            { value: 'Buzz', label: 'Buzz' },
+            { value: 'Brackets', label: 'Brackets' },
+            { value: 'CompetitionsStats', label: 'Competitions Stats' },
+            { value: 'Videos', label: 'Videos' },
+            { value: 'Teams', label: 'Teams' },
+            { value: 'History', label: 'History' },
+            { value: 'DrawingOpponents', label: 'Drawing Opponents' }
+          ]
+        },
         { key: 'tz', label: 'Timezone', placeholder: 'Enter timezone ID', type: 'select', category: 'core', options: [
           { value: '2', label: 'GMT' },
           { value: '5', label: 'Central Europe' },
