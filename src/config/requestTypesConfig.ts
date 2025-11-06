@@ -263,7 +263,7 @@ export const sharedParameters: RequestParameter[] = [
       { value: 'Videos', label: 'Videos' }
       { value: 'Teams', label: 'Teams' }
       { value: 'History', label: 'History' }
-      { value: 'DrawingOpponents', label: 'Drawing Opponents' }
+      { value: 'DrawingOpponents', label: 'Drawing Opponents' },
     ]
   },
   { 
