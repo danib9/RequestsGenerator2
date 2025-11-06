@@ -983,6 +983,130 @@ export const requestTypesConfig: Record<string, RequestTypeConfig[]> = {
         ]}
       ]
     },
+        {
+      id: 'competition-dashboard',
+      label: 'Competition Dashboard',
+      baseUrl: 'https://mobileapi.365scores.com',
+      endpoint: '/Data/Dashboard/',
+      parameters: [
+        // Order: apptype, appversion, competitions, filtersourcesout, lang, newslang, storeversion, theme, tz, uc, usertestgroup, withmainodds, withoddspreviews, withtransfers
+        { key: 'apptype', label: 'App Type', placeholder: 'e.g. 1,2 etc.', type: 'select', category: 'core', options: [
+          { value: '1', label: 'iPhone' },
+          { value: '2', label: 'Android' },
+          { value: '5', label: 'Web' }
+        ]},
+        { key: 'appversion', label: 'App Version', placeholder: 'e.g. 9.9.9', type: 'text', category: 'core' },
+        { key: 'competitions', label: 'Competitions', placeholder: 'Comma separated competition IDs', type: 'text', category: 'shared' },
+        { key: 'filtersourcesout', label: 'Filter Sources Out', placeholder: 'Select option', type: 'select', category: 'shared', options: [
+          { value: 'true', label: 'True' },
+          { value: 'false', label: 'False' }
+        ]},
+        { key: 'lang', label: 'Language', placeholder: 'Select language', type: 'select', category: 'core', options: [
+          { value: '1', label: 'English' },
+          { value: '2', label: 'Hebrew-IL' },
+          { value: '9', label: 'English-US' },
+          { value: '10', label: 'English-GB' },
+          { value: '12', label: 'Italian' },
+          { value: '14', label: 'Spanish-ES' },
+          { value: '15', label: 'French' },
+          { value: '16', label: 'German' },
+          { value: '21', label: 'Russian' },
+          { value: '27', label: 'Arabic' },
+          { value: '30', label: 'Portuguese-PT' },
+          { value: '31', label: 'Portuguese-BR' },
+          { value: '33', label: 'Turkish' },
+          { value: '34', label: 'Indian' }
+        ]},
+        { key: 'newslang', label: 'News Language', placeholder: 'Select language', type: 'select', category: 'shared', options: [
+          { value: '1', label: 'English' },
+          { value: '2', label: 'Hebrew-IL' },
+          { value: '9', label: 'English-US' },
+          { value: '10', label: 'English-GB' },
+          { value: '12', label: 'Italian' },
+          { value: '14', label: 'Spanish-ES' },
+          { value: '15', label: 'French' },
+          { value: '16', label: 'German' },
+          { value: '21', label: 'Russian' },
+          { value: '27', label: 'Arabic' },
+          { value: '30', label: 'Portuguese-PT' },
+          { value: '31', label: 'Portuguese-BR' },
+          { value: '33', label: 'Turkish' },
+          { value: '34', label: 'Indian' }
+        ]},
+        { key: 'storeversion', label: 'Store Version', placeholder: 'e.g. 9.9.9', type: 'text', category: 'core' },
+        { key: 'theme', label: 'Theme', placeholder: 'Select theme', type: 'select', category: 'core', options: [
+          { value: 'light', label: 'Light' },
+          { value: 'dark', label: 'Dark' }
+        ]},
+         { 
+          key: 'sections', 
+          label: 'Sections', 
+          placeholder: 'Select section', 
+          type: 'select',
+          category: 'shared',
+          alias: 'Sections',
+          options: [
+            { value: 'Games', label: 'Games' },
+            { value: 'Outrights', label: 'Outrights' },
+            { value: 'PlayersStats', label: 'Players Stats' },
+            { value: 'TeamsStats', label: 'Teams Stats' },
+            { value: 'Details', label: 'Details' },
+            { value: 'MATCHES', label: 'Matches' },
+            { value: 'Standings', label: 'Standings' },
+            { value: 'Trophies', label: 'Trophies' },
+            { value: 'News', label: 'News' },
+            { value: 'SOCIAL', label: 'Social' },
+            { value: 'Chat', label: 'Chat' },
+            { value: 'Transfers', label: 'Transfers' },
+            { value: 'SQUAD', label: 'Squad' },
+            { value: 'Highlights', label: 'Highlights' },
+            { value: 'Scores', label: 'Scores' },
+            { value: 'Buzz', label: 'Buzz' },
+            { value: 'Brackets', label: 'Brackets' },
+            { value: 'CompetitionsStats', label: 'Competitions Stats' },
+            { value: 'Videos', label: 'Videos' },
+            { value: 'Teams', label: 'Teams' },
+            { value: 'History', label: 'History' },
+            { value: 'DrawingOpponents', label: 'Drawing Opponents' }
+          ]
+        },
+        { key: 'tz', label: 'Timezone', placeholder: 'Enter timezone ID', type: 'select', category: 'core', options: [
+          { value: '2', label: 'GMT' },
+          { value: '5', label: 'Central Europe' },
+          { value: '11', label: 'Middle East' },
+          { value: '15', label: 'Israel' },
+          { value: '33', label: 'India' },
+          { value: '76', label: 'US Eastern' },
+          { value: '77', label: 'Central America' },
+          { value: '86', label: 'Pacific' },
+          { value: '110', label: 'Central Brazilian' }
+        ]},
+        { key: 'uc', label: 'User Country', placeholder: 'Enter user country ID', type: 'select', category: 'core', options: [
+          { value: '1', label: 'England' },
+          { value: '2', label: 'Spain' },
+          { value: '3', label: 'Italy' },
+          { value: '4', label: 'Germany' },
+          { value: '5', label: 'France' },
+          { value: '6', label: 'Israel' },
+          { value: '18', label: 'USA' },
+          { value: '21', label: 'Brazil' },
+          { value: '119', label: 'Jordan' }
+        ]},
+        { key: 'usertestgroup', label: 'User Test Group', placeholder: 'Enter user test group', type: 'text', category: 'shared' },
+        { key: 'withmainodds', label: 'With Main Odds', placeholder: 'Select option', type: 'select', category: 'shared', options: [
+          { value: 'true', label: 'True' },
+          { value: 'false', label: 'False' }
+        ]},
+        { key: 'withoddspreviews', label: 'With Odds Previews', placeholder: 'Select option', type: 'select', category: 'shared', options: [
+          { value: 'true', label: 'True' },
+          { value: 'false', label: 'False' }
+        ]},
+        { key: 'withtransfers', label: 'With Transfers', placeholder: 'Select option', type: 'select', category: 'shared', options: [
+          { value: 'true', label: 'True' },
+          { value: 'false', label: 'False' }
+        ]}
+      ]
+    },
     {
       id: 'competition-matches',
       label: 'Competition Matches',
