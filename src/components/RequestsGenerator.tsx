@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Copy, ExternalLink, Trash2 } from 'lucide-react';
 import FormField from './FormField';
 import { requestTypesConfig, dsgRequestTypesConfig } from '../config/requestTypesConfig';
+import { dsgRequestTypesConfig } from '../config/dsgRequestTypesConfig';
 import { optaRequestTypesConfig } from '../config/optaRequestTypesConfig';
 import { sportRadarRequestTypesConfig } from '../config/sportRadarConfig';
 import { optaStandingsConfig } from '../config/optaStandingsConfig';
