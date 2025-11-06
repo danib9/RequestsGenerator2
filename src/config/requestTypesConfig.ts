@@ -256,6 +256,14 @@ export const sharedParameters: RequestParameter[] = [
       { value: 'Transfers', label: 'Transfers' },
       { value: 'SQUAD', label: 'Squad' },
       { value: 'Highlights', label: 'Highlights' }
+      { value: 'Scores', label: 'Scores' }
+      { value: 'Buzz', label: 'Buzz' }
+      { value: 'Brackets', label: 'Brackets' }
+      { value: 'CompetitionsStats', label: 'Competitions Stats' }
+      { value: 'Videos', label: 'Videos' }
+      { value: 'Teams', label: 'Teams' }
+      { value: 'History', label: 'History' }
+      { value: 'DrawingOpponents', label: 'Drawing Opponents' }
     ]
   },
   { 
