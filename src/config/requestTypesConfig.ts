@@ -593,17 +593,7 @@ export const requestTypesConfig: Record<string, RequestTypeConfig[]> = {
           { value: '21', label: 'Brazil' },
           { value: '119', label: 'Jordan' }
         ]},
-        { key: 'usc', label: 'US Country ID', placeholder: 'Enter US country ID', type: 'select', category: 'unique', options: [
-          { value: '1', label: 'England' },
-          { value: '2', label: 'Spain' },
-          { value: '3', label: 'Italy' },
-          { value: '4', label: 'Germany' },
-          { value: '5', label: 'France' },
-          { value: '6', label: 'Israel' },
-          { value: '18', label: 'USA' },
-          { value: '21', label: 'Brazil' },
-          { value: '119', label: 'Jordan' }
-        ]},
+        { key: 'usc', label: 'USC', placeholder: 'Enter USC', type: 'text', category: 'unique' },
         { key: 'tz', label: 'Timezone', placeholder: 'Enter timezone ID', type: 'select', category: 'core', options: [
           { value: '2', label: 'GMT' },
           { value: '5', label: 'Central Europe' },
@@ -1606,98 +1596,6 @@ export const requestTypesConfig: Record<string, RequestTypeConfig[]> = {
           { value: 'false', label: 'False' }
         ]}
       ]
-    },
-    {
-      id: 'competitor-matches',
-      label: 'Competitor Matches (Light)',
-      baseUrl: 'https://mobileapi.365scores.com',
-      endpoint: '/Data/Dashboard/Light/',
-      parameters: [
-        // Order: apptype, appversion, competitors, filtersourcesout, lang, newslang, storeversion, theme, tz, uc, usertestgroup, withmainodds, withoddspreviews, withtransfers
-        { key: 'apptype', label: 'App Type', placeholder: 'e.g. 1,2 etc.', type: 'select', category: 'core', options: [
-          { value: '1', label: 'iPhone' },
-          { value: '2', label: 'Android' },
-          { value: '5', label: 'Web' }
-        ]},
-        { key: 'appversion', label: 'App Version', placeholder: 'e.g. 9.9.9', type: 'text', category: 'core' },
-        { key: 'competitors', label: 'Competitors', placeholder: 'Comma separated competitor IDs', type: 'text', category: 'shared' },
-        { key: 'filtersourcesout', label: 'Filter Sources Out', placeholder: 'Select option', type: 'select', category: 'shared', options: [
-          { value: 'true', label: 'True' },
-          { value: 'false', label: 'False' }
-        ]},
-        { key: 'lang', label: 'Language', placeholder: 'Select language', type: 'select', category: 'core', options: [
-          { value: '1', label: 'English' },
-          { value: '2', label: 'Hebrew-IL' },
-          { value: '9', label: 'English-US' },
-          { value: '10', label: 'English-GB' },
-          { value: '12', label: 'Italian' },
-          { value: '14', label: 'Spanish-ES' },
-          { value: '15', label: 'French' },
-          { value: '16', label: 'German' },
-          { value: '21', label: 'Russian' },
-          { value: '27', label: 'Arabic' },
-          { value: '30', label: 'Portuguese-PT' },
-          { value: '31', label: 'Portuguese-BR' },
-          { value: '33', label: 'Turkish' },
-          { value: '34', label: 'Indian' }
-        ]},
-        { key: 'newslang', label: 'News Language', placeholder: 'Select language', type: 'select', category: 'shared', options: [
-          { value: '1', label: 'English' },
-          { value: '2', label: 'Hebrew-IL' },
-          { value: '9', label: 'English-US' },
-          { value: '10', label: 'English-GB' },
-          { value: '12', label: 'Italian' },
-          { value: '14', label: 'Spanish-ES' },
-          { value: '15', label: 'French' },
-          { value: '16', label: 'German' },
-          { value: '21', label: 'Russian' },
-          { value: '27', label: 'Arabic' },
-          { value: '30', label: 'Portuguese-PT' },
-          { value: '31', label: 'Portuguese-BR' },
-          { value: '33', label: 'Turkish' },
-          { value: '34', label: 'Indian' }
-        ]},
-        { key: 'storeversion', label: 'Store Version', placeholder: 'e.g. 9.9.9', type: 'text', category: 'core' },
-        { key: 'theme', label: 'Theme', placeholder: 'Select theme', type: 'select', category: 'core', options: [
-          { value: 'light', label: 'Light' },
-          { value: 'dark', label: 'Dark' }
-        ]},
-        { key: 'tz', label: 'Timezone', placeholder: 'Enter timezone ID', type: 'select', category: 'core', options: [
-          { value: '2', label: 'GMT' },
-          { value: '5', label: 'Central Europe' },
-          { value: '11', label: 'Middle East' },
-          { value: '15', label: 'Israel' },
-          { value: '33', label: 'India' },
-          { value: '76', label: 'US Eastern' },
-          { value: '77', label: 'Central America' },
-          { value: '86', label: 'Pacific' },
-          { value: '110', label: 'Central Brazilian' }
-        ]},
-        { key: 'uc', label: 'User Country', placeholder: 'Enter user country ID', type: 'select', category: 'core', options: [
-          { value: '1', label: 'England' },
-          { value: '2', label: 'Spain' },
-          { value: '3', label: 'Italy' },
-          { value: '4', label: 'Germany' },
-          { value: '5', label: 'France' },
-          { value: '6', label: 'Israel' },
-          { value: '18', label: 'USA' },
-          { value: '21', label: 'Brazil' },
-          { value: '119', label: 'Jordan' }
-        ]},
-        { key: 'usertestgroup', label: 'User Test Group', placeholder: 'Enter user test group', type: 'text', category: 'shared' },
-        { key: 'withmainodds', label: 'With Main Odds', placeholder: 'Select option', type: 'select', category: 'shared', options: [
-          { value: 'true', label: 'True' },
-          { value: 'false', label: 'False' }
-        ]},
-        { key: 'withoddspreviews', label: 'With Odds Previews', placeholder: 'Select option', type: 'select', category: 'shared', options: [
-          { value: 'true', label: 'True' },
-          { value: 'false', label: 'False' }
-        ]},
-        { key: 'withtransfers', label: 'With Transfers', placeholder: 'Select option', type: 'select', category: 'shared', options: [
-          { value: 'true', label: 'True' },
-          { value: 'false', label: 'False' }
-        ]}
-      ]
     }
   ]
 };
@@ -1739,6 +1637,7 @@ export const dsgRequestTypesConfig = [
     id: 'daily-matches',
     label: 'Daily Schedule',
     baseUrl: 'https://dsg-api.com/clients/365scores',
+    endpoint: '/get_daily_schedule',
     parameters: [
       {
         key: 'sportType',
@@ -1769,6 +1668,7 @@ export const dsgRequestTypesConfig = [
     id: 'team-squad',
     label: 'Team Squad',
     baseUrl: 'https://dsg-api.com/clients/365scores',
+    endpoint: '/get_team_squad',
     parameters: [
       {
         key: 'sportType',
@@ -1799,6 +1699,7 @@ export const dsgRequestTypesConfig = [
     id: 'player-request',
     label: 'Player Request',
     baseUrl: 'https://dsg-api.com/clients/365scores',
+    endpoint: '/get_player',
     parameters: [
       {
         key: 'sportType',
