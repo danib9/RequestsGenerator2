@@ -860,7 +860,7 @@ export const requestTypesConfig: Record<string, RequestTypeConfig[]> = {
   ],
   Competition: [
     {
-      id: 'competition-dashboard',
+      id: 'competition-dashboard-light',
       label: 'Competition Dashboard (Light)',
       baseUrl: 'https://mobileapi.365scores.com',
       endpoint: '/Data/Dashboard/Light/',
