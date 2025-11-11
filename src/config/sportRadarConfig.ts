@@ -59,7 +59,6 @@ export const sportRadarRequestTypesConfig: SportRadarRequestConfig[] = [
         placeholder: 'Enter Sport Event ID'
       }
     ]
-  }
   },
   {
     id: 'game-boxscore',
@@ -75,4 +74,5 @@ export const sportRadarRequestTypesConfig: SportRadarRequestConfig[] = [
         placeholder: 'Enter SportRadar Game PID'
       }
     ]
+  }
 ];
