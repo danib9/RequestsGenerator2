@@ -39,6 +39,11 @@ const RequestsGenerator: React.FC = () => {
             newData[key] = '';
           }
         });
+        
+        // Set default values for specific request types
+        if (value === 'game-summary' && formData.source === 'sportRadar') {
+          newData.SummaryType = 'summary';
+        }
       }
       
       return newData;
