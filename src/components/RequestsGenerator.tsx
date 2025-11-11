@@ -328,10 +328,10 @@ const RequestsGenerator: React.FC = () => {
           return null;
         }
         
-        // Convert date from YYYY-MM-DD to YYYY-MM-DD format (already correct)
-        const formattedDate = date;
+        // Convert date from YYYY-MM-DD to YYYY/MM/DD format
+        const formattedDate = date.replace(/-/g, '/');
         
-        return `https://api.sportradar.com/${sportType.toLowerCase()}/trial/v3/en/schedules/${formattedDate}/summaries.json?start=200&limit=200&api_key=hdq7wcu8xkavawwtjjgp2hpp`;
+        return `https://api.sportradar.com/${sportType.toLowerCase()}/production/v8/en/games/${formattedDate}/schedule.json?api_key=1xvTXAAxCa7D4kP4dzQ1E4XXobYFrjAi7r3lZeH4`;
       }
       
       // For SportRadar Sport Event, build the URL with sport event ID
