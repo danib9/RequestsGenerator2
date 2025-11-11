@@ -66,6 +66,18 @@ export const sportRadarRequestTypesConfig: SportRadarRequestConfig[] = [
     baseUrl: 'https://api.sportradar.com/nfl/official/production/v7/en/games',
     parameters: [
       {
+        key: 'Competition',
+        label: 'Competition',
+        type: 'select',
+        required: true,
+        category: 'shared',
+        options: [
+          { value: 'nfl', label: 'NFL' },
+          { value: 'nhl', label: 'NHL' },
+          { value: 'ncaaf', label: 'NCAAF' }
+        ]
+      },
+      {
         key: 'SportRadarGamePID',
         label: 'SportRadar Game PID',
         type: 'text',
