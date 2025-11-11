@@ -362,7 +362,12 @@ const RequestsGenerator: React.FC = () => {
           return null;
         }
         
-        return `https://api.sportradar.com/${competition}/official/production/v7/en/games/${gameId}/boxscore.json?api_key=1xvTXAAxCa7D4kP4dzQ1E4XXobYFrjAi7r3lZeH4`;
+        // NFL uses "official" in the URL path, NCAAFB does not
+        const urlPath = competition === 'nfl' 
+          ? `${competition}/official/production/v7/en/games/${gameId}/boxscore.json`
+          : `${competition}/production/v7/en/games/${gameId}/boxscore.json`;
+        
+        return `https://api.sportradar.com/${urlPath}?api_key=1xvTXAAxCa7D4kP4dzQ1E4XXobYFrjAi7r3lZeH4`;
       }
       
       // For SportRadar Season Schedule, build the URL with season year and type
