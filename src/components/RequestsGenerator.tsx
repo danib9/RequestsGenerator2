@@ -355,6 +355,18 @@ const RequestsGenerator: React.FC = () => {
         
         return `https://api.sportradar.com/nfl/official/production/v7/en/games/${gameId}/boxscore.json?api_key=1xvTXAAxCa7D4kP4dzQ1E4XXobYFrjAi7r3lZeH4`;
       }
+      
+      // For SportRadar Season Schedule, build the URL with season year and type
+      if (requestType === 'season-schedule') {
+        const seasonYear = formData.SeasonYear;
+        const seasonType = formData.SeasonType;
+        
+        if (!seasonYear || !seasonType) {
+          return null;
+        }
+        
+        return `https://api.sportradar.com/nfl/official/production/v7/en/games/${seasonYear}/${seasonType}/schedule.json?api_key=1xvTXAAxCa7D4kP4dzQ1E4XXobYFrjAi7r3lZeH4`;
+      }
     }
 
     return null;

@@ -75,4 +75,32 @@ export const sportRadarRequestTypesConfig: SportRadarRequestConfig[] = [
       }
     ]
   }
+  ,
+  {
+    id: 'season-schedule',
+    label: 'Season Schedule',
+    baseUrl: 'https://api.sportradar.com/nfl/official/production/v7/en/games',
+    parameters: [
+      {
+        key: 'SeasonYear',
+        label: 'Season Year',
+        type: 'text',
+        required: true,
+        category: 'shared',
+        placeholder: 'Enter Season Year'
+      },
+      {
+        key: 'SeasonType',
+        label: 'Season Type',
+        type: 'select',
+        required: true,
+        category: 'shared',
+        options: [
+          { value: 'PRE', label: 'Pre Season' },
+          { value: 'REG', label: 'Regular Season' },
+          { value: 'PST', label: 'Post Season' }
+        ]
+      }
+    ]
+  }
 ];
