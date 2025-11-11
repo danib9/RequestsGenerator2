@@ -27,7 +27,6 @@ export const sportRadarRequestTypesConfig: SportRadarRequestConfig[] = [
         required: true,
         category: 'unique',
         options: [
-          { value: 'nfl', label: 'NFL' },
           { value: 'nba', label: 'NBA' },
           { value: 'wnba', label: 'WNBA' },
           { value: 'ncaamb', label: 'NCAAMB' },
