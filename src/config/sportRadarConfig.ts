@@ -73,8 +73,7 @@ export const sportRadarRequestTypesConfig: SportRadarRequestConfig[] = [
         category: 'shared',
         options: [
           { value: 'nfl', label: 'NFL' },
-          { value: 'nhl', label: 'NHL' },
-          { value: 'ncaaf', label: 'NCAAF' }
+          { value: 'ncaafb', label: 'NCAAFB' }
         ]
       },
       {
@@ -101,8 +100,7 @@ export const sportRadarRequestTypesConfig: SportRadarRequestConfig[] = [
         category: 'shared',
         options: [
           { value: 'nfl', label: 'NFL' },
-          { value: 'nhl', label: 'NHL' },
-          { value: 'ncaaf', label: 'NCAAF' }
+          { value: 'ncaafb', label: 'NCAAFB' }
         ]
       },
       {
