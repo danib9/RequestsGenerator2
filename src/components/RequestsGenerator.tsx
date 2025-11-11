@@ -374,6 +374,19 @@ const RequestsGenerator: React.FC = () => {
         
         return `https://api.sportradar.com/${urlPath}?api_key=1xvTXAAxCa7D4kP4dzQ1E4XXobYFrjAi7r3lZeH4`;
       }
+      
+      // For SportRadar Game Summary, build the URL with competition, PID, and summary type
+      if (requestType === 'game-summary') {
+        const competition = formData.Competition;
+        const sportRadarPID = formData.SportRadarPID;
+        const summaryType = formData.SummaryType;
+        
+        if (!competition || !sportRadarPID || !summaryType) {
+          return null;
+        }
+        
+        return `https://api.sportradar.com/${competition}/production/v8/en/games/${sportRadarPID}/${summaryType}.json?api_key=1xvTXAAxCa7D4kP4dzQ1E4XXobYFrjAi7r3lZeH4`;
+      }
     }
 
     return null;

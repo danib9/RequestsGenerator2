@@ -124,4 +124,45 @@ export const sportRadarRequestTypesConfig: SportRadarRequestConfig[] = [
       }
     ]
   }
+  ,
+  {
+    id: 'game-summary',
+    label: 'Game Summary',
+    baseUrl: 'https://api.sportradar.com',
+    parameters: [
+      {
+        key: 'Competition',
+        label: 'Competition',
+        type: 'select',
+        required: true,
+        category: 'shared',
+        options: [
+          { value: 'nba', label: 'NBA' },
+          { value: 'wnba', label: 'WNBA' },
+          { value: 'ncaamb', label: 'NCAAB' },
+          { value: 'nhl', label: 'NHL' },
+          { value: 'mlb', label: 'MLB' }
+        ]
+      },
+      {
+        key: 'SportRadarPID',
+        label: 'SportRadar PID',
+        type: 'text',
+        required: true,
+        category: 'shared',
+        placeholder: 'Enter SportRadar PID'
+      },
+      {
+        key: 'SummaryType',
+        label: 'Summary Type',
+        type: 'select',
+        required: true,
+        category: 'shared',
+        options: [
+          { value: 'summary', label: 'Regular (Default)' },
+          { value: 'extended_summary', label: 'Extended' }
+        ]
+      }
+    ]
+  }
 ];
