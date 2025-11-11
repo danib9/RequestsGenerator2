@@ -390,7 +390,10 @@ const RequestsGenerator: React.FC = () => {
           return null;
         }
         
-        return `https://api.sportradar.com/${competition}/production/v8/en/games/${sportRadarPID}/${summaryType}.json?api_key=1xvTXAAxCa7D4kP4dzQ1E4XXobYFrjAi7r3lZeH4`;
+        // Use v7 for NHL, v8 for all other competitions
+        const apiVersion = competition === 'nhl' ? 'v7' : 'v8';
+        
+        return `https://api.sportradar.com/${competition}/production/${apiVersion}/en/games/${sportRadarPID}/${summaryType}.json?api_key=1xvTXAAxCa7D4kP4dzQ1E4XXobYFrjAi7r3lZeH4`;
       }
     }
 
