@@ -336,7 +336,10 @@ const RequestsGenerator: React.FC = () => {
         // Convert date from YYYY-MM-DD to YYYY/MM/DD format
         const formattedDate = date.replace(/-/g, '/');
         
-        return `https://api.sportradar.com/${sportType.toLowerCase()}/production/v8/en/games/${formattedDate}/schedule.json?api_key=1xvTXAAxCa7D4kP4dzQ1E4XXobYFrjAi7r3lZeH4`;
+        // Use v7 for NHL, v8 for all other competitions
+        const apiVersion = sportType === 'nhl' ? 'v7' : 'v8';
+        
+        return `https://api.sportradar.com/${sportType.toLowerCase()}/production/${apiVersion}/en/games/${formattedDate}/schedule.json?api_key=1xvTXAAxCa7D4kP4dzQ1E4XXobYFrjAi7r3lZeH4`;
       }
       
       // For SportRadar Sport Event, build the URL with sport event ID
