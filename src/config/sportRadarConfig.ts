@@ -22,17 +22,17 @@ export const sportRadarRequestTypesConfig: SportRadarRequestConfig[] = [
     parameters: [
       {
         key: 'sportType',
-        label: 'Sport type',
+        label: 'Competitions',
         type: 'select',
         required: true,
         category: 'unique',
         options: [
-          { value: 'tennis', label: 'Tennis' },
-          { value: 'soccer', label: 'Soccer' },
-          { value: 'basketball', label: 'Basketball' },
-          { value: 'baseball', label: 'Baseball' },
-          { value: 'football', label: 'Football' },
-          { value: 'hockey', label: 'Hockey' }
+          { value: 'nfl', label: 'NFL' },
+          { value: 'nba', label: 'NBA' },
+          { value: 'wnba', label: 'WNBA' },
+          { value: 'ncaamb', label: 'NCAAMB' },
+          { value: 'nhl', label: 'NHL' },
+          { value: 'mlb', label: 'MLB' }
         ]
       },
       {
