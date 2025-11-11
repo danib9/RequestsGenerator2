@@ -367,7 +367,12 @@ const RequestsGenerator: React.FC = () => {
           return null;
         }
         
-        return `https://api.sportradar.com/${competition}/official/production/v7/en/games/${seasonYear}/${seasonType}/schedule.json?api_key=1xvTXAAxCa7D4kP4dzQ1E4XXobYFrjAi7r3lZeH4`;
+        // NFL uses "official" in the URL path, NCAAFB does not
+        const urlPath = competition === 'nfl' 
+          ? `${competition}/official/production/v7/en/games/${seasonYear}/${seasonType}/schedule.json`
+          : `${competition}/production/v7/en/games/${seasonYear}/${seasonType}/schedule.json`;
+        
+        return `https://api.sportradar.com/${urlPath}?api_key=1xvTXAAxCa7D4kP4dzQ1E4XXobYFrjAi7r3lZeH4`;
       }
     }
 
