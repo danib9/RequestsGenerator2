@@ -344,6 +344,17 @@ const RequestsGenerator: React.FC = () => {
         
         return `https://api.sportradar.us/tennis/trial/v3/en/sport_events/sr:sport_event:${sportEventId}/timeline.json?api_key=hdq7wcu8xkavawwtjjgp2hpp`;
       }
+      
+      // For SportRadar Game Boxscore, build the URL with game PID
+      if (requestType === 'game-boxscore') {
+        const gameId = formData.SportRadarGamePID;
+        
+        if (!gameId) {
+          return null;
+        }
+        
+        return `https://api.sportradar.com/nfl/official/production/v7/en/games/${gameId}/boxscore.json?api_key=1xvTXAAxCa7D4kP4dzQ1E4XXobYFrjAi7r3lZeH4`;
+      }
     }
 
     return null;

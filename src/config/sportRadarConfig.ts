@@ -60,4 +60,19 @@ export const sportRadarRequestTypesConfig: SportRadarRequestConfig[] = [
       }
     ]
   }
+  },
+  {
+    id: 'game-boxscore',
+    label: 'Game Boxscore',
+    baseUrl: 'https://api.sportradar.com/nfl/official/production/v7/en/games',
+    parameters: [
+      {
+        key: 'SportRadarGamePID',
+        label: 'SportRadar Game PID',
+        type: 'text',
+        required: true,
+        category: 'shared',
+        placeholder: 'Enter SportRadar Game PID'
+      }
+    ]
 ];
