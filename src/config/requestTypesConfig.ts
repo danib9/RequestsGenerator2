@@ -1941,7 +1941,8 @@ export const sportRadarRequestTypesConfig = [
         options: [
           { value: 'soccer', label: 'Soccer' },
           { value: 'basketball', label: 'Basketball' },
-          { value: 'tennis', label: 'Tennis' }
+          { value: 'tennis', label: 'Tennis' },
+          { value: 'volleyball', label: 'Volleyball' }
         ]
       },
       {
