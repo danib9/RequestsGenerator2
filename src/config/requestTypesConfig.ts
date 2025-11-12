@@ -1820,7 +1820,8 @@ export const dsgRequestTypesConfig = [
           { value: 'Tennis', label: 'Tennis' },
           { value: 'Baseball', label: 'Baseball' },
           { value: 'Football', label: 'Football' },
-          { value: 'Hockey', label: 'Hockey' }
+          { value: 'Hockey', label: 'Hockey' },
+          { value: 'volleyball', label: 'Volleyball' }
         ]
       },
       {
@@ -1851,7 +1852,8 @@ export const dsgRequestTypesConfig = [
           { value: 'tennis', label: 'Tennis' },
           { value: 'baseball', label: 'Baseball' },
           { value: 'football', label: 'Football' },
-          { value: 'hockey', label: 'Hockey' }
+          { value: 'hockey', label: 'Hockey' },
+          { value: 'volleyball', label: 'Volleyball' }
         ]
       },
       {
@@ -1882,7 +1884,8 @@ export const dsgRequestTypesConfig = [
           { value: 'tennis', label: 'Tennis' },
           { value: 'baseball', label: 'Baseball' },
           { value: 'football', label: 'Football' },
-          { value: 'hockey', label: 'Hockey' }
+          { value: 'hockey', label: 'Hockey' },
+          { value: 'volleyball', label: 'Volleyball' }
         ]
       },
       {
