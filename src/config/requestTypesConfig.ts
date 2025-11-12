@@ -1222,7 +1222,7 @@ export const requestTypesConfig: Record<string, RequestTypeConfig[]> = {
       baseUrl: 'https://mobileapi.365scores.com',
       endpoint: '/Data/Dashboard/Light/',
       parameters: [
-        // Order: NewsLang, Countries, Competitions, Competitors, Games, Athletes, UserCountry, OnlyInLang, OnlyInCountry, WithTransfers, newsSources, FilterSourcesOut, IsTablet, Sections, isInitialStatsRequest, OddsFormat, lang, AppType, AppVersion, uc, tz, theme, StoreVersion, athletesSupported, UserTestGroup
+        // Order: Competitions, NewsLang, Countries, Competitors, Games, Athletes, UserCountry, OnlyInLang, OnlyInCountry, WithTransfers, newsSources, FilterSourcesOut, IsTablet, Sections, isInitialStatsRequest, OddsFormat, lang, AppType, AppVersion, uc, tz, theme, StoreVersion, athletesSupported, UserTestGroup
         { key: 'newslang', label: 'News Language', placeholder: 'Select language', type: 'select', category: 'shared', alias: 'NewsLang',options: [
           { value: '1', label: 'English' },
           { value: '2', label: 'Hebrew-IL' },
