@@ -1223,6 +1223,7 @@ export const requestTypesConfig: Record<string, RequestTypeConfig[]> = {
       endpoint: '/Data/Dashboard/Light/',
       parameters: [
         // Order: Competitions, NewsLang, Countries, Competitors, Games, Athletes, UserCountry, OnlyInLang, OnlyInCountry, WithTransfers, newsSources, FilterSourcesOut, IsTablet, Sections, isInitialStatsRequest, OddsFormat, lang, AppType, AppVersion, uc, tz, theme, StoreVersion, athletesSupported, UserTestGroup
+        { key: 'competitions', label: 'Competition IDs', placeholder: 'Comma separated competition IDs', type: 'text', required: true, category: 'shared', alias: 'Competitions' },     
         { key: 'newslang', label: 'News Language', placeholder: 'Select language', type: 'select', category: 'shared', alias: 'NewsLang',options: [
           { value: '1', label: 'English' },
           { value: '2', label: 'Hebrew-IL' },
@@ -1250,7 +1251,6 @@ export const requestTypesConfig: Record<string, RequestTypeConfig[]> = {
           { value: '21', label: 'Brazil' },
           { value: '119', label: 'Jordan' }
         ]},
-        { key: 'competitions', label: 'Competition IDs', placeholder: 'Comma separated competition IDs', type: 'text', required: true, category: 'shared', alias: 'Competitions' },
         { key: 'competitors', label: 'Competitors', placeholder: 'Comma separated competitor IDs', type: 'text', category: 'shared', alias: 'Competitors' },
         { key: 'games', label: 'Games', placeholder: 'Comma separated game IDs', type: 'text', category: 'shared', alias: 'Games' },
         { key: 'athletes', label: 'Athletes', placeholder: 'Comma separated athlete IDs', type: 'text', category: 'shared', alias: 'Athletes' },
