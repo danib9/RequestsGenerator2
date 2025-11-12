@@ -872,7 +872,7 @@ export const requestTypesConfig: Record<string, RequestTypeConfig[]> = {
           { value: '5', label: 'Web' }
         ]},
         { key: 'appversion', label: 'App Version', placeholder: 'e.g. 9.9.9', type: 'text', category: 'core' },
-        { key: 'competitions', label: 'Competitions', placeholder: 'Comma separated competition IDs', type: 'text', category: 'shared' },
+        { key: 'competitions', label: 'Competition IDs', placeholder: 'Comma separated competition IDs', required: true, type: 'text', category: 'shared' },
         { key: 'filtersourcesout', label: 'Filter Sources Out', placeholder: 'Select option', type: 'select', category: 'shared', options: [
           { value: 'true', label: 'True' },
           { value: 'false', label: 'False' }
@@ -996,7 +996,7 @@ export const requestTypesConfig: Record<string, RequestTypeConfig[]> = {
           { value: '5', label: 'Web' }
         ]},
         { key: 'appversion', label: 'App Version', placeholder: 'e.g. 9.9.9', type: 'text', category: 'core' },
-        { key: 'competitions', label: 'Competitions', placeholder: 'Comma separated competition IDs', type: 'text', category: 'shared' },
+        { key: 'competitions', label: 'Competition IDs', placeholder: 'Comma separated competition IDs', required: true, type: 'text', category: 'shared' },
         { key: 'filtersourcesout', label: 'Filter Sources Out', placeholder: 'Select option', type: 'select', category: 'shared', options: [
           { value: 'true', label: 'True' },
           { value: 'false', label: 'False' }
@@ -1120,7 +1120,7 @@ export const requestTypesConfig: Record<string, RequestTypeConfig[]> = {
           { value: '5', label: 'Web' }
         ]},
         { key: 'appversion', label: 'App Version', placeholder: 'e.g. 9.9.9', type: 'text', category: 'core' },
-        { key: 'competitions', label: 'Competitions', placeholder: 'Comma separated competition IDs', type: 'text', category: 'shared' },
+        { key: 'competitions', label: 'Competition IDs', placeholder: 'Comma separated competition IDs', required: true, type: 'text', category: 'shared' },
         { key: 'filtersourcesout', label: 'Filter Sources Out', placeholder: 'Select option', type: 'select', category: 'shared', options: [
           { value: 'true', label: 'True' },
           { value: 'false', label: 'False' }
@@ -1222,7 +1222,8 @@ export const requestTypesConfig: Record<string, RequestTypeConfig[]> = {
       baseUrl: 'https://mobileapi.365scores.com',
       endpoint: '/Data/Dashboard/Light/',
       parameters: [
-        // Order: NewsLang, Countries, Competitions, Competitors, Games, Athletes, UserCountry, OnlyInLang, OnlyInCountry, WithTransfers, newsSources, FilterSourcesOut, IsTablet, Sections, isInitialStatsRequest, OddsFormat, lang, AppType, AppVersion, uc, tz, theme, StoreVersion, athletesSupported, UserTestGroup
+        // Order: Competitions, NewsLang, Countries, Competitors, Games, Athletes, UserCountry, OnlyInLang, OnlyInCountry, WithTransfers, newsSources, FilterSourcesOut, IsTablet, Sections, isInitialStatsRequest, OddsFormat, lang, AppType, AppVersion, uc, tz, theme, StoreVersion, athletesSupported, UserTestGroup
+        { key: 'competitions', label: 'Competition IDs', placeholder: 'Comma separated competition IDs', type: 'text', required: true, category: 'shared', alias: 'Competitions' },     
         { key: 'newslang', label: 'News Language', placeholder: 'Select language', type: 'select', category: 'shared', alias: 'NewsLang',options: [
           { value: '1', label: 'English' },
           { value: '2', label: 'Hebrew-IL' },
@@ -1250,7 +1251,6 @@ export const requestTypesConfig: Record<string, RequestTypeConfig[]> = {
           { value: '21', label: 'Brazil' },
           { value: '119', label: 'Jordan' }
         ]},
-        { key: 'competitions', label: 'Competitions', placeholder: 'Comma separated competition IDs', type: 'text', category: 'shared', alias: 'Competitions' },
         { key: 'competitors', label: 'Competitors', placeholder: 'Comma separated competitor IDs', type: 'text', category: 'shared', alias: 'Competitors' },
         { key: 'games', label: 'Games', placeholder: 'Comma separated game IDs', type: 'text', category: 'shared', alias: 'Games' },
         { key: 'athletes', label: 'Athletes', placeholder: 'Comma separated athlete IDs', type: 'text', category: 'shared', alias: 'Athletes' },
@@ -1395,6 +1395,7 @@ export const requestTypesConfig: Record<string, RequestTypeConfig[]> = {
       endpoint: '/Data/Dashboard/Light/',
       parameters: [
         // Order: Same as player stats but Sections=TeamsStats
+        { key: 'competitions', label: 'Competition IDs', placeholder: 'Comma separated competition IDs', type: 'text', required: true, category: 'shared', alias: 'Competitions' },
         { key: 'newslang', label: 'News Language', placeholder: 'Select language', type: 'select', category: 'shared', alias: 'NewsLang', options: [
           { value: '1', label: 'English' },
           { value: '2', label: 'Hebrew-IL' },
@@ -1422,7 +1423,6 @@ export const requestTypesConfig: Record<string, RequestTypeConfig[]> = {
           { value: '21', label: 'Brazil' },
           { value: '119', label: 'Jordan' }
         ]},
-        { key: 'competitions', label: 'Competitions', placeholder: 'Comma separated competition IDs', type: 'text', category: 'shared', alias: 'Competitions' },
         { key: 'competitors', label: 'Competitors', placeholder: 'Comma separated competitor IDs', type: 'text', category: 'shared', alias: 'Competitors' },
         { key: 'games', label: 'Games', placeholder: 'Comma separated game IDs', type: 'text', category: 'shared', alias: 'Games' },
         { key: 'athletes', label: 'Athletes', placeholder: 'Comma separated athlete IDs', type: 'text', category: 'shared', alias: 'Athletes' },
@@ -1573,7 +1573,7 @@ export const requestTypesConfig: Record<string, RequestTypeConfig[]> = {
           { value: '5', label: 'Web' }
         ]},
         { key: 'appversion', label: 'App Version', placeholder: 'e.g. 9.9.9', type: 'text', category: 'core' },
-        { key: 'competitions', label: 'Competitions', placeholder: 'Comma separated competition IDs', type: 'text', category: 'shared' },
+        { key: 'competitions', label: 'Competition IDs', placeholder: 'Comma separated competition IDs', type: 'text', required: true, category: 'shared' },
         { key: 'filtersourcesout', label: 'Filter Sources Out', placeholder: 'Select option', type: 'select', category: 'shared', options: [
           { value: 'true', label: 'True' },
           { value: 'false', label: 'False' }
@@ -1788,7 +1788,8 @@ export const dsgRequestTypesConfig = [
           { value: 'Tennis', label: 'Tennis' },
           { value: 'Baseball', label: 'Baseball' },
           { value: 'Football', label: 'Football' },
-          { value: 'Hockey', label: 'Hockey' }
+          { value: 'Hockey', label: 'Hockey' },
+          { value: 'volleyball', label: 'Volleyball' }
         ]
       },
       {
@@ -1819,7 +1820,8 @@ export const dsgRequestTypesConfig = [
           { value: 'Tennis', label: 'Tennis' },
           { value: 'Baseball', label: 'Baseball' },
           { value: 'Football', label: 'Football' },
-          { value: 'Hockey', label: 'Hockey' }
+          { value: 'Hockey', label: 'Hockey' },
+          { value: 'volleyball', label: 'Volleyball' }
         ]
       },
       {
@@ -1850,7 +1852,8 @@ export const dsgRequestTypesConfig = [
           { value: 'tennis', label: 'Tennis' },
           { value: 'baseball', label: 'Baseball' },
           { value: 'football', label: 'Football' },
-          { value: 'hockey', label: 'Hockey' }
+          { value: 'hockey', label: 'Hockey' },
+          { value: 'volleyball', label: 'Volleyball' }
         ]
       },
       {
@@ -1881,7 +1884,8 @@ export const dsgRequestTypesConfig = [
           { value: 'tennis', label: 'Tennis' },
           { value: 'baseball', label: 'Baseball' },
           { value: 'football', label: 'Football' },
-          { value: 'hockey', label: 'Hockey' }
+          { value: 'hockey', label: 'Hockey' },
+          { value: 'volleyball', label: 'Volleyball' }
         ]
       },
       {
@@ -1941,7 +1945,8 @@ export const sportRadarRequestTypesConfig = [
         options: [
           { value: 'soccer', label: 'Soccer' },
           { value: 'basketball', label: 'Basketball' },
-          { value: 'tennis', label: 'Tennis' }
+          { value: 'tennis', label: 'Tennis' },
+          { value: 'volleyball', label: 'Volleyball' }
         ]
       },
       {
