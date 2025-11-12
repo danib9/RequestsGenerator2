@@ -1120,7 +1120,7 @@ export const requestTypesConfig: Record<string, RequestTypeConfig[]> = {
           { value: '5', label: 'Web' }
         ]},
         { key: 'appversion', label: 'App Version', placeholder: 'e.g. 9.9.9', type: 'text', category: 'core' },
-        { key: 'competitions', label: 'Competitions', placeholder: 'Comma separated competition IDs', type: 'text', category: 'shared' },
+        { key: 'competitions', label: 'Competition IDs', placeholder: 'Comma separated competition IDs', required: true, type: 'text', category: 'shared' },
         { key: 'filtersourcesout', label: 'Filter Sources Out', placeholder: 'Select option', type: 'select', category: 'shared', options: [
           { value: 'true', label: 'True' },
           { value: 'false', label: 'False' }
