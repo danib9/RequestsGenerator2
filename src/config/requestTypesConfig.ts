@@ -1395,6 +1395,7 @@ export const requestTypesConfig: Record<string, RequestTypeConfig[]> = {
       endpoint: '/Data/Dashboard/Light/',
       parameters: [
         // Order: Same as player stats but Sections=TeamsStats
+        { key: 'competitions', label: 'Competition IDs', placeholder: 'Comma separated competition IDs', type: 'text', required: true, category: 'shared', alias: 'Competitions' },
         { key: 'newslang', label: 'News Language', placeholder: 'Select language', type: 'select', category: 'shared', alias: 'NewsLang', options: [
           { value: '1', label: 'English' },
           { value: '2', label: 'Hebrew-IL' },
