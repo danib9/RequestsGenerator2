@@ -314,6 +314,21 @@ const RequestsGenerator: React.FC = () => {
         
         return `${requestConfig.baseUrl}/${sportType.toLowerCase()}/get_peoples?id=${playerId}&client=365scores&authkey=20HY4kxTKp9UbiMV7wuyqOs8WfjPBZmgndo`;
       }
+      
+      // For DSG Play by Play request, build the URL with competition, version, and game PID
+      if (requestType === 'play-by-play') {
+        const competition = formData.DSGCompetition;
+        const gamePID = formData.DSGGamePID;
+        
+        if (!competition || !gamePID) {
+          return null;
+        }
+        
+        // Determine version based on competition
+        const version = ['nfl', 'ncaafb', 'nhl'].includes(competition) ? 'v7' : 'v8';
+        
+        return `https://api.sportradar.com/${competition}/official/production/${version}/en/games/${gamePID}/pbp.json?api_key=1xvTXAAxCa7D4kP4dzQ1E4XXobYFrjAi7r3lZeH4`;
+      }
     }
 
 
