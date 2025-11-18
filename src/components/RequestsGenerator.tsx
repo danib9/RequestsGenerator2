@@ -328,7 +328,12 @@ const RequestsGenerator: React.FC = () => {
         // Determine version based on competition
         const version = ['nfl', 'ncaafb', 'nhl'].includes(competition) ? 'v7' : 'v8';
         
-        return `https://api.sportradar.com/${competition}/official/production/${version}/en/games/${gamePID}/pbp.json?api_key=1xvTXAAxCa7D4kP4dzQ1E4XXobYFrjAi7r3lZeH4`;
+        // NFL uses "official" in the URL path, all other competitions do not
+        const urlPath = competition === 'nfl' 
+          ? `${competition}/official/production/${version}/en/games/${gamePID}/pbp.json`
+          : `${competition}/production/${version}/en/games/${gamePID}/pbp.json`;
+        
+        return `https://api.sportradar.com/${urlPath}?api_key=1xvTXAAxCa7D4kP4dzQ1E4XXobYFrjAi7r3lZeH4`;
       }
     }
 
