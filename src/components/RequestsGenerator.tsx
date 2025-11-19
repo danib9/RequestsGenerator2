@@ -357,6 +357,26 @@ const RequestsGenerator: React.FC = () => {
           return `https://api.sportradar.com/${competition}/production/${version}/en/seasons/${seasonYear}/${seasonType}/standings.json?api_key=1xvTXAAxCa7D4kP4dzQ1E4XXobYFrjAi7r3lZeH4`;
         }
       }
+      
+      // For DSG Team Profile request, build the URL with competition and team PID
+      if (requestType === 'team-profile') {
+        const competition = formData.DSGCompetition;
+        const teamPID = formData.DSGTeamPID;
+        
+        if (!competition || !teamPID) {
+          return null;
+        }
+        
+        // Determine version based on competition
+        const version = ['nfl', 'nhl'].includes(competition) ? 'v7' : 'v8';
+        
+        // NFL uses "official" in the URL path, all other competitions do not
+        const urlPath = competition === 'nfl' 
+          ? `${competition}/official/production/${version}/en/teams/${teamPID}/profile.json`
+          : `${competition}/production/${version}/en/teams/${teamPID}/profile.json`;
+        
+        return `https://api.sportradar.com/${urlPath}?api_key=1xvTXAAxCa7D4kP4dzQ1E4XXobYFrjAi7r3lZeH4`;
+      }
     }
 
 

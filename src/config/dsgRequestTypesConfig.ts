@@ -205,4 +205,34 @@ export const dsgRequestTypesConfig: DSGRequestConfig[] = [
       }
     ]
   }
+  ,
+  {
+    id: 'team-profile',
+    label: 'Team Profile',
+    baseUrl: 'https://api.sportradar.com',
+    parameters: [
+      {
+        key: 'DSGCompetition',
+        label: 'DSG Competition',
+        type: 'select',
+        required: true,
+        category: 'shared',
+        options: [
+          { value: 'nfl', label: 'NFL' },
+          { value: 'nba', label: 'NBA' },
+          { value: 'wnba', label: 'WNBA' },
+          { value: 'nhl', label: 'NHL' },
+          { value: 'mlb', label: 'MLB' }
+        ]
+      },
+      {
+        key: 'DSGTeamPID',
+        label: 'DSG Team PID',
+        type: 'text',
+        required: true,
+        category: 'shared',
+        placeholder: 'Enter DSG Team PID'
+      }
+    ]
+  }
 ];
