@@ -377,6 +377,26 @@ const RequestsGenerator: React.FC = () => {
         
         return `https://api.sportradar.com/${urlPath}?api_key=1xvTXAAxCa7D4kP4dzQ1E4XXobYFrjAi7r3lZeH4`;
       }
+      
+      // For DSG Player Profile request, build the URL with competition and player PID
+      if (requestType === 'player-profile') {
+        const competition = formData.DSGCompetition;
+        const playerPID = formData.DSGPlayerPID;
+        
+        if (!competition || !playerPID) {
+          return null;
+        }
+        
+        // Determine version based on competition
+        const version = ['nfl', 'nhl'].includes(competition) ? 'v7' : 'v8';
+        
+        // NFL uses "official" in the URL path, all other competitions do not
+        const urlPath = competition === 'nfl' 
+          ? `${competition}/official/production/${version}/en/players/${playerPID}/profile.json`
+          : `${competition}/production/${version}/en/players/${playerPID}/profile.json`;
+        
+        return `https://api.sportradar.com/${urlPath}?api_key=1xvTXAAxCa7D4kP4dzQ1E4XXobYFrjAi7r3lZeH4`;
+      }
     }
 
 
