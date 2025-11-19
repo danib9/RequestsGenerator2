@@ -158,4 +158,51 @@ export const dsgRequestTypesConfig: DSGRequestConfig[] = [
       }
     ]
   }
+  ,
+  {
+    id: 'standings',
+    label: 'Standings',
+    baseUrl: 'https://api.sportradar.com',
+    parameters: [
+      {
+        key: 'DSGCompetition',
+        label: 'DSG Competition',
+        type: 'select',
+        required: true,
+        category: 'shared',
+        options: [
+          { value: 'nfl', label: 'NFL' },
+          { value: 'nba', label: 'NBA' },
+          { value: 'wnba', label: 'WNBA' },
+          { value: 'nhl', label: 'NHL' },
+          { value: 'mlb', label: 'MLB' }
+        ]
+      },
+      {
+        key: 'SeasonYear',
+        label: 'Season Year',
+        type: 'select',
+        required: true,
+        category: 'shared',
+        options: [
+          { value: '2023', label: '2023' },
+          { value: '2024', label: '2024' },
+          { value: '2025', label: '2025' },
+          { value: '2026', label: '2026' }
+        ]
+      },
+      {
+        key: 'SeasonType',
+        label: 'Season Type',
+        type: 'select',
+        required: true,
+        category: 'shared',
+        options: [
+          { value: 'PRE', label: 'Pre Season' },
+          { value: 'REG', label: 'Regular Season' },
+          { value: 'PST', label: 'Post Season' }
+        ]
+      }
+    ]
+  }
 ];
