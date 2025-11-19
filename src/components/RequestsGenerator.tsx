@@ -414,6 +414,17 @@ const RequestsGenerator: React.FC = () => {
         
         return `https://api.sportradar.com/${urlPath}?api_key=1xvTXAAxCa7D4kP4dzQ1E4XXobYFrjAi7r3lZeH4`;
       }
+      
+      // For DSG Current Week Schedule request, build the URL with competition
+      if (requestType === 'current-week-schedule') {
+        const competition = formData.DSGCompetition;
+        
+        if (!competition) {
+          return null;
+        }
+        
+        return `https://api.sportradar.com/${competition}/production/v7/en/games/current_week/schedule.json?api_key=1xvTXAAxCa7D4kP4dzQ1E4XXobYFrjAi7r3lZeH4`;
+      }
     }
 
 

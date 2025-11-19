@@ -292,4 +292,22 @@ export const dsgRequestTypesConfig: DSGRequestConfig[] = [
       }
     ]
   }
+  ,
+  {
+    id: 'current-week-schedule',
+    label: 'Current Week Schedule',
+    baseUrl: 'https://api.sportradar.com',
+    parameters: [
+      {
+        key: 'DSGCompetition',
+        label: 'DSG Competition',
+        type: 'select',
+        required: true,
+        category: 'shared',
+        options: [
+          { value: 'ncaafb', label: 'NCAAFB' }
+        ]
+      }
+    ]
+  }
 ];
