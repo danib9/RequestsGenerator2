@@ -268,6 +268,54 @@ const RequestsGenerator: React.FC = () => {
         return null;
       }
 
+      // For DSG Game request, build the URL with sport type and match ID
+      if (requestType === 'game') {
+        const sportType = formData.sportType;
+        const dsgMatchPID = formData.dsgMatchPID;
+        
+        if (!sportType || !dsgMatchPID) {
+          return null;
+        }
+        
+        return `${requestConfig.baseUrl}/${sportType.toLowerCase()}/get_matches?type=match&id=${dsgMatchPID}&client=365scores&authkey=20HY4kxTKp9UbiMV7wuyqOs8WfjPBZmgndo`;
+      }
+      
+      // For DSG Daily Matches request, build the URL with sport type and date
+      if (requestType === 'daily-matches') {
+        const sportType = formData.sportType;
+        const date = formData.date;
+        
+        if (!sportType || !date) {
+          return null;
+        }
+        
+        return `${requestConfig.baseUrl}/${sportType.toLowerCase()}/get_matches_day?day=${date}&client=365scores&authkey=20HY4kxTKp9UbiMV7wuyqOs8WfjPBZmgndo`;
+      }
+      
+      // For DSG Team Squad request, build the URL with sport type and team ID
+      if (requestType === 'team-squad') {
+        const sportType = formData.sportType;
+        const teamId = formData.Team_ID;
+        
+        if (!sportType || !teamId) {
+          return null;
+        }
+        
+        return `${requestConfig.baseUrl}/${sportType.toLowerCase()}/get_squad?team=${teamId}&client=365scores&authkey=20HY4kxTKp9UbiMV7wuyqOs8WfjPBZmgndo`;
+      }
+      
+      // For DSG Player Request, build the URL with sport type and player ID
+      if (requestType === 'player-request') {
+        const sportType = formData.sportType;
+        const playerId = formData.Player_ID;
+        
+        if (!sportType || !playerId) {
+          return null;
+        }
+        
+        return `${requestConfig.baseUrl}/${sportType.toLowerCase()}/get_peoples?id=${playerId}&client=365scores&authkey=20HY4kxTKp9UbiMV7wuyqOs8WfjPBZmgndo`;
+      }
+      
       // For DSG Play by Play request, build the URL with competition, version, and game PID
       if (requestType === 'play-by-play') {
         const competition = formData.DSGCompetition;
