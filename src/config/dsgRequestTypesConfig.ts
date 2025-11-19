@@ -279,7 +279,7 @@ export const dsgRequestTypesConfig: DSGRequestConfig[] = [
         category: 'shared',
         options: [
           { value: 'nfl', label: 'NFL' },
-          { value: 'ncaaf', label: 'NCAAF' }
+          { value: 'ncaafb', label: 'NCAAF' }
         ]
       },
       {
