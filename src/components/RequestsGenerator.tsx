@@ -397,6 +397,23 @@ const RequestsGenerator: React.FC = () => {
         
         return `https://api.sportradar.com/${urlPath}?api_key=1xvTXAAxCa7D4kP4dzQ1E4XXobYFrjAi7r3lZeH4`;
       }
+      
+      // For DSG Game Statistics request, build the URL with competition and game PID
+      if (requestType === 'game-statistics') {
+        const competition = formData.DSGCompetition;
+        const gamePID = formData.DSGGamePID;
+        
+        if (!competition || !gamePID) {
+          return null;
+        }
+        
+        // NFL uses "official" in the URL path, NCAAF does not
+        const urlPath = competition === 'nfl' 
+          ? `${competition}/official/production/v7/en/games/${gamePID}/statistics.json`
+          : `${competition}/production/v7/en/games/${gamePID}/statistics.json`;
+        
+        return `https://api.sportradar.com/${urlPath}?api_key=1xvTXAAxCa7D4kP4dzQ1E4XXobYFrjAi7r3lZeH4`;
+      }
     }
 
 

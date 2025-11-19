@@ -265,4 +265,31 @@ export const dsgRequestTypesConfig: DSGRequestConfig[] = [
       }
     ]
   }
+  ,
+  {
+    id: 'game-statistics',
+    label: 'Game Statistics',
+    baseUrl: 'https://api.sportradar.com',
+    parameters: [
+      {
+        key: 'DSGCompetition',
+        label: 'DSG Competition',
+        type: 'select',
+        required: true,
+        category: 'shared',
+        options: [
+          { value: 'nfl', label: 'NFL' },
+          { value: 'ncaaf', label: 'NCAAF' }
+        ]
+      },
+      {
+        key: 'DSGGamePID',
+        label: 'DSG Game PID',
+        type: 'text',
+        required: true,
+        category: 'shared',
+        placeholder: 'Enter DSG Game PID'
+      }
+    ]
+  }
 ];
