@@ -315,116 +315,6 @@ const RequestsGenerator: React.FC = () => {
         
         return `${requestConfig.baseUrl}/${sportType.toLowerCase()}/get_peoples?id=${playerId}&client=365scores&authkey=20HY4kxTKp9UbiMV7wuyqOs8WfjPBZmgndo`;
       }
-      
-      // For DSG Play by Play request, build the URL with competition, version, and game PID
-      if (requestType === 'play-by-play') {
-        const competition = formData.DSGCompetition;
-        const gamePID = formData.DSGGamePID;
-        
-        if (!competition || !gamePID) {
-          return null;
-        }
-        
-        // Determine version based on competition
-        const version = ['nfl', 'ncaafb', 'nhl'].includes(competition) ? 'v7' : 'v8';
-        
-        // NFL uses "official" in the URL path, all other competitions do not
-        const urlPath = competition === 'nfl' 
-          ? `${competition}/official/production/${version}/en/games/${gamePID}/pbp.json`
-          : `${competition}/production/${version}/en/games/${gamePID}/pbp.json`;
-        
-        return `https://api.sportradar.com/${urlPath}?api_key=1xvTXAAxCa7D4kP4dzQ1E4XXobYFrjAi7r3lZeH4`;
-      }
-      
-      // For DSG Standings request, build the URL with competition, season year, and season type
-      if (requestType === 'standings') {
-        const competition = formData.DSGCompetition;
-        const seasonYear = formData.SeasonYear;
-        const seasonType = formData.SeasonType;
-        
-        if (!competition || !seasonYear || !seasonType) {
-          return null;
-        }
-        
-        // Determine version based on competition
-        const version = ['nfl', 'nhl'].includes(competition) ? 'v7' : 'v8';
-        
-        // NFL uses "official" in the URL path, all other competitions do not
-        // Also, NFL uses different endpoint structure
-        if (competition === 'nfl') {
-          return `https://api.sportradar.com/${competition}/official/production/${version}/en/seasons/${seasonYear}/${seasonType}/standings/season.json?api_key=1xvTXAAxCa7D4kP4dzQ1E4XXobYFrjAi7r3lZeH4`;
-        } else {
-          return `https://api.sportradar.com/${competition}/production/${version}/en/seasons/${seasonYear}/${seasonType}/standings.json?api_key=1xvTXAAxCa7D4kP4dzQ1E4XXobYFrjAi7r3lZeH4`;
-        }
-      }
-      
-      // For DSG Team Profile request, build the URL with competition and team PID
-      if (requestType === 'team-profile') {
-        const competition = formData.DSGCompetition;
-        const teamPID = formData.DSGTeamPID;
-        
-        if (!competition || !teamPID) {
-          return null;
-        }
-        
-        // Determine version based on competition
-        const version = ['nfl', 'nhl'].includes(competition) ? 'v7' : 'v8';
-        
-        // NFL uses "official" in the URL path, all other competitions do not
-        const urlPath = competition === 'nfl' 
-          ? `${competition}/official/production/${version}/en/teams/${teamPID}/profile.json`
-          : `${competition}/production/${version}/en/teams/${teamPID}/profile.json`;
-        
-        return `https://api.sportradar.com/${urlPath}?api_key=1xvTXAAxCa7D4kP4dzQ1E4XXobYFrjAi7r3lZeH4`;
-      }
-      
-      // For DSG Player Profile request, build the URL with competition and player PID
-      if (requestType === 'player-profile') {
-        const competition = formData.DSGCompetition;
-        const playerPID = formData.DSGPlayerPID;
-        
-        if (!competition || !playerPID) {
-          return null;
-        }
-        
-        // Determine version based on competition
-        const version = ['nfl', 'nhl'].includes(competition) ? 'v7' : 'v8';
-        
-        // NFL uses "official" in the URL path, all other competitions do not
-        const urlPath = competition === 'nfl' 
-          ? `${competition}/official/production/${version}/en/players/${playerPID}/profile.json`
-          : `${competition}/production/${version}/en/players/${playerPID}/profile.json`;
-        
-        return `https://api.sportradar.com/${urlPath}?api_key=1xvTXAAxCa7D4kP4dzQ1E4XXobYFrjAi7r3lZeH4`;
-      }
-      
-      // For DSG Game Statistics request, build the URL with competition and game PID
-      if (requestType === 'game-statistics') {
-        const competition = formData.DSGCompetition;
-        const gamePID = formData.DSGGamePID;
-        
-        if (!competition || !gamePID) {
-          return null;
-        }
-        
-        // NFL uses "official" in the URL path, NCAAF does not
-        const urlPath = competition === 'nfl' 
-          ? `${competition}/official/production/v7/en/games/${gamePID}/statistics.json`
-          : `${competition}/production/v7/en/games/${gamePID}/statistics.json`;
-        
-        return `https://api.sportradar.com/${urlPath}?api_key=1xvTXAAxCa7D4kP4dzQ1E4XXobYFrjAi7r3lZeH4`;
-      }
-      
-      // For DSG Current Week Schedule request, build the URL with competition
-      if (requestType === 'current-week-schedule') {
-        const competition = formData.DSGCompetition;
-        
-        if (!competition) {
-          return null;
-        }
-        
-        return `https://api.sportradar.com/${competition}/production/v7/en/games/current_week/schedule.json?api_key=1xvTXAAxCa7D4kP4dzQ1E4XXobYFrjAi7r3lZeH4`;
-      }
     }
 
 
@@ -513,6 +403,116 @@ const RequestsGenerator: React.FC = () => {
         const apiVersion = competition === 'nhl' ? 'v7' : 'v8';
         
         return `https://api.sportradar.com/${competition}/production/${apiVersion}/en/games/${sportRadarPID}/${summaryType}.json?api_key=1xvTXAAxCa7D4kP4dzQ1E4XXobYFrjAi7r3lZeH4`;
+      }
+      
+      // For SportRadar Play by Play request, build the URL with competition, version, and game PID
+      if (requestType === 'play-by-play') {
+        const competition = formData.DSGCompetition;
+        const gamePID = formData.DSGGamePID;
+        
+        if (!competition || !gamePID) {
+          return null;
+        }
+        
+        // Determine version based on competition
+        const version = ['nfl', 'ncaafb', 'nhl'].includes(competition) ? 'v7' : 'v8';
+        
+        // NFL uses "official" in the URL path, all other competitions do not
+        const urlPath = competition === 'nfl' 
+          ? `${competition}/official/production/${version}/en/games/${gamePID}/pbp.json`
+          : `${competition}/production/${version}/en/games/${gamePID}/pbp.json`;
+        
+        return `https://api.sportradar.com/${urlPath}?api_key=1xvTXAAxCa7D4kP4dzQ1E4XXobYFrjAi7r3lZeH4`;
+      }
+      
+      // For SportRadar Standings request, build the URL with competition, season year, and season type
+      if (requestType === 'standings') {
+        const competition = formData.DSGCompetition;
+        const seasonYear = formData.SeasonYear;
+        const seasonType = formData.SeasonType;
+        
+        if (!competition || !seasonYear || !seasonType) {
+          return null;
+        }
+        
+        // Determine version based on competition
+        const version = ['nfl', 'nhl'].includes(competition) ? 'v7' : 'v8';
+        
+        // NFL uses "official" in the URL path, all other competitions do not
+        // Also, NFL uses different endpoint structure
+        if (competition === 'nfl') {
+          return `https://api.sportradar.com/${competition}/official/production/${version}/en/seasons/${seasonYear}/${seasonType}/standings/season.json?api_key=1xvTXAAxCa7D4kP4dzQ1E4XXobYFrjAi7r3lZeH4`;
+        } else {
+          return `https://api.sportradar.com/${competition}/production/${version}/en/seasons/${seasonYear}/${seasonType}/standings.json?api_key=1xvTXAAxCa7D4kP4dzQ1E4XXobYFrjAi7r3lZeH4`;
+        }
+      }
+      
+      // For SportRadar Team Profile request, build the URL with competition and team PID
+      if (requestType === 'team-profile') {
+        const competition = formData.DSGCompetition;
+        const teamPID = formData.DSGTeamPID;
+        
+        if (!competition || !teamPID) {
+          return null;
+        }
+        
+        // Determine version based on competition
+        const version = ['nfl', 'nhl'].includes(competition) ? 'v7' : 'v8';
+        
+        // NFL uses "official" in the URL path, all other competitions do not
+        const urlPath = competition === 'nfl' 
+          ? `${competition}/official/production/${version}/en/teams/${teamPID}/profile.json`
+          : `${competition}/production/${version}/en/teams/${teamPID}/profile.json`;
+        
+        return `https://api.sportradar.com/${urlPath}?api_key=1xvTXAAxCa7D4kP4dzQ1E4XXobYFrjAi7r3lZeH4`;
+      }
+      
+      // For SportRadar Player Profile request, build the URL with competition and player PID
+      if (requestType === 'player-profile') {
+        const competition = formData.DSGCompetition;
+        const playerPID = formData.DSGPlayerPID;
+        
+        if (!competition || !playerPID) {
+          return null;
+        }
+        
+        // Determine version based on competition
+        const version = ['nfl', 'nhl'].includes(competition) ? 'v7' : 'v8';
+        
+        // NFL uses "official" in the URL path, all other competitions do not
+        const urlPath = competition === 'nfl' 
+          ? `${competition}/official/production/${version}/en/players/${playerPID}/profile.json`
+          : `${competition}/production/${version}/en/players/${playerPID}/profile.json`;
+        
+        return `https://api.sportradar.com/${urlPath}?api_key=1xvTXAAxCa7D4kP4dzQ1E4XXobYFrjAi7r3lZeH4`;
+      }
+      
+      // For SportRadar Game Statistics request, build the URL with competition and game PID
+      if (requestType === 'game-statistics') {
+        const competition = formData.DSGCompetition;
+        const gamePID = formData.DSGGamePID;
+        
+        if (!competition || !gamePID) {
+          return null;
+        }
+        
+        // NFL uses "official" in the URL path, NCAAF does not
+        const urlPath = competition === 'nfl' 
+          ? `${competition}/official/production/v7/en/games/${gamePID}/statistics.json`
+          : `${competition}/production/v7/en/games/${gamePID}/statistics.json`;
+        
+        return `https://api.sportradar.com/${urlPath}?api_key=1xvTXAAxCa7D4kP4dzQ1E4XXobYFrjAi7r3lZeH4`;
+      }
+      
+      // For SportRadar Current Week Schedule request, build the URL with competition
+      if (requestType === 'current-week-schedule') {
+        const competition = formData.DSGCompetition;
+        
+        if (!competition) {
+          return null;
+        }
+        
+        return `https://api.sportradar.com/${competition}/production/v7/en/games/current_week/schedule.json?api_key=1xvTXAAxCa7D4kP4dzQ1E4XXobYFrjAi7r3lZeH4`;
       }
     }
 
