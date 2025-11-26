@@ -247,7 +247,7 @@ const RequestsGenerator: React.FC = () => {
           return null;
         }
         
-        return `https://api.performfeeds.com/soccerdata/matchstats/8a46333n0iqf19n7oh3f1953y/${optaPID}?_fmt=json&_rt=b&detailed=yes`;
+        return `https://api.performfeeds.com/soccerdata/matchstats/137iv2fgxqg281d2xtb1pl4oyi/${optaPID}?_fmt=json&_rt=b&detailed=yes`;
       }
       
       // For Opta Match xG, replace the Opta PID in the URL
@@ -257,7 +257,7 @@ const RequestsGenerator: React.FC = () => {
           return null;
         }
         
-        return `https://api.performfeeds.com/soccerdata/matchexpectedgoals/8a46333n0iqf19n7oh3f1953y/${optaPID}?_rt=b&_fmt=json`;
+        return `https://api.performfeeds.com/soccerdata/matchexpectedgoals/137iv2fgxqg281d2xtb1pl4oyi/${optaPID}?_rt=b&_fmt=json`;
       }
     }
 
