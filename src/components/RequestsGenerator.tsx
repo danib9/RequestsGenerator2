@@ -106,7 +106,14 @@ const RequestsGenerator: React.FC = () => {
         }
       });
 
-      const fullUrl = `${requestConfig.baseUrl}${requestConfig.endpoint}${queryParts.length ? '?' + queryParts.join('&') : ''}`;
+      // Handle environment-specific URL generation
+      let baseUrl = requestConfig.baseUrl;
+      if (environment !== 'production') {
+        // Replace 'mobileapi' with the QA environment
+        baseUrl = baseUrl.replace('mobileapi.365scores.com', `${environment}.365scores.com`);
+      }
+      
+      const fullUrl = `${baseUrl}${requestConfig.endpoint}${queryParts.length ? '?' + queryParts.join('&') : ''}`;
       return fullUrl;
     }
     
@@ -665,8 +672,19 @@ const RequestsGenerator: React.FC = () => {
 
   const environmentOptions = [
     { value: 'production', label: 'Production' },
-    { value: 'staging', label: 'Staging' },
-    { value: 'development', label: 'Development' }
+    { value: 'qa', label: 'QA' },
+    { value: 'qa1', label: 'QA1' },
+    { value: 'qa2', label: 'QA2' },
+    { value: 'qa3', label: 'QA3' },
+    { value: 'qa4', label: 'QA4' },
+    { value: 'qa5', label: 'QA5' },
+    { value: 'qa6', label: 'QA6' },
+    { value: 'qa7', label: 'QA7' },
+    { value: 'qa8', label: 'QA8' },
+    { value: 'qa9', label: 'QA9' },
+    { value: 'qa10', label: 'QA10' },
+    { value: 'qa11', label: 'QA11' },
+    { value: 'qa12', label: 'QA12' }
   ];
 
   // Get request type options based on selected source
@@ -722,7 +740,7 @@ const RequestsGenerator: React.FC = () => {
                 placeholder="Select environment"
                 required
                 options={environmentOptions}
-                disabledOptions={['staging', 'development']}
+                disabledOptions={[]}
                 onChange={(value) => updateFormField('environment', value)}
               />
             </>
