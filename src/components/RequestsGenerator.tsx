@@ -673,6 +673,7 @@ const RequestsGenerator: React.FC = () => {
   const environmentOptions = [
     { value: 'production', label: 'Production' },
     { value: 'qa', label: 'QA' },
+    { value: 'qasanity', label: 'QA Sanity' },
     { value: 'qa1', label: 'QA1' },
     { value: 'qa2', label: 'QA2' },
     { value: 'qa3', label: 'QA3' },
