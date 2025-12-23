@@ -531,12 +531,15 @@ export const requestTypesConfig: Record<string, RequestTypeConfig[]> = {
         ]},
         { key: 'sports', label: 'Sport Type', placeholder: 'Select sport', type: 'select', category: 'unique', options: [
           { value: '1', label: 'Football' },
-          { value: '2', label: 'Tennis' },
-          { value: '3', label: 'Basketball' },
-          { value: '4', label: 'Volleyball' },
+          { value: '2', label: 'Basketball' },
+          { value: '3', label: 'Tennis' },
+          { value: '4', label: 'Hockey' },
           { value: '5', label: 'Handball' },
           { value: '6', label: 'A. Football' },
-          { value: '7', label: 'Baseball' }
+          { value: '7', label: 'Baseball' },
+          { value: '8', label: 'Volleyball' },
+          { value: '9', label: 'Rugby' },
+          { value: '11', label: 'Cricket' }
         ]},
         { key: 'onlymajorgames', label: 'Only Major Games', placeholder: 'Select option', type: 'select', category: 'unique', options: [
           { value: 'true', label: 'True' },
