@@ -195,6 +195,27 @@ export const sportRadarRequestTypesConfig: SportRadarRequestConfig[] = [
     ]
   },
   {
+    id: 'all-competitions',
+    label: 'All Competitions',
+    baseUrl: 'https://api.sportradar.com/soccer-extended/trial/v4/en/competitions.json',
+    parameters: []
+  },
+  {
+    id: 'lineups',
+    label: 'Lineups',
+    baseUrl: 'https://api.sportradar.com/soccer-extended/trial/v4/en/sport_events',
+    parameters: [
+      {
+        key: 'GameID',
+        label: 'Game ID',
+        type: 'text',
+        required: true,
+        category: 'shared',
+        placeholder: 'Enter Game ID'
+      }
+    ]
+  },
+  {
     id: 'standings',
     label: 'Standings',
     baseUrl: 'https://api.sportradar.com',
@@ -241,6 +262,21 @@ export const sportRadarRequestTypesConfig: SportRadarRequestConfig[] = [
     ]
   },
   {
+    id: 'daily-summaries',
+    label: 'Daily Summaries',
+    baseUrl: 'https://api.sportradar.com/soccer/trial/v4/en/schedules',
+    parameters: [
+      {
+        key: 'Date',
+        label: 'Date',
+        type: 'date',
+        required: true,
+        category: 'shared',
+        placeholder: 'Select date'
+      }
+    ]
+  },
+  {
     id: 'team-profile',
     label: 'Team Profile',
     baseUrl: 'https://api.sportradar.com',
@@ -266,6 +302,21 @@ export const sportRadarRequestTypesConfig: SportRadarRequestConfig[] = [
         required: true,
         category: 'shared',
         placeholder: 'Enter DSG Team PID'
+      }
+    ]
+  },
+  {
+    id: 'advanced-analytics',
+    label: 'Advanced Analytics',
+    baseUrl: 'https://api.sportradar.com/soccer-extended/trial/v4/en/sport_events',
+    parameters: [
+      {
+        key: 'GameID',
+        label: 'Game ID',
+        type: 'text',
+        required: true,
+        category: 'shared',
+        placeholder: 'Enter Game ID'
       }
     ]
   },
@@ -338,6 +389,21 @@ export const sportRadarRequestTypesConfig: SportRadarRequestConfig[] = [
         options: [
           { value: 'ncaafb', label: 'NCAAFB' }
         ]
+      }
+    ]
+  },
+  {
+    id: 'soccer-season-schedule',
+    label: 'Season Schedule (Soccer)',
+    baseUrl: 'https://api.sportradar.com/soccer-extended/production/v4/en/seasons',
+    parameters: [
+      {
+        key: 'SeasonID',
+        label: 'Season ID',
+        type: 'text',
+        required: true,
+        category: 'shared',
+        placeholder: 'Enter Season ID'
       }
     ]
   }
