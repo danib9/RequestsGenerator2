@@ -403,6 +403,55 @@ const RequestsGenerator: React.FC = () => {
         
         return `https://api.sportradar.com/${competition}/production/${apiVersion}/en/games/${sportRadarPID}/${summaryType}.json?api_key=1xvTXAAxCa7D4kP4dzQ1E4XXobYFrjAi7r3lZeH4`;
       }
+
+      // For SportRadar All Competitions, return the fixed URL
+      if (requestType === 'all-competitions') {
+        return `https://api.sportradar.com/soccer-extended/trial/v4/en/competitions.json?api_key=1xvTXAAxCa7D4kP4dzQ1E4XXobYFrjAi7r3lZeH4`;
+      }
+
+      // For SportRadar Lineups, build the URL with the sport event Game ID
+      if (requestType === 'lineups') {
+        const gameId = formData.GameID;
+
+        if (!gameId) {
+          return null;
+        }
+
+        return `https://api.sportradar.com/soccer-extended/trial/v4/en/sport_events/sr:sport_event:${gameId}/lineups.json?api_key=1xvTXAAxCa7D4kP4dzQ1E4XXobYFrjAi7r3lZeH4`;
+      }
+
+      // For SportRadar Daily Summaries, build the URL with the date
+      if (requestType === 'daily-summaries') {
+        const date = formData.Date;
+
+        if (!date) {
+          return null;
+        }
+
+        return `https://api.sportradar.com/soccer/trial/v4/en/schedules/${date}/summaries.json?api_key=YcAsBnwfaN6VSjPlm6dsj4Hjr5o9hd0c8s1c1g6p`;
+      }
+
+      // For SportRadar Advanced Analytics, build the URL with the sport event Game ID
+      if (requestType === 'advanced-analytics') {
+        const gameId = formData.GameID;
+
+        if (!gameId) {
+          return null;
+        }
+
+        return `https://api.sportradar.com/soccer-extended/trial/v4/en/sport_events/sr:sport_event:${gameId}/timeline.json?api_key=1xvTXAAxCa7D4kP4dzQ1E4XXobYFrjAi7r3lZeH4`;
+      }
+
+      // For SportRadar Soccer Season Schedule, build the URL with the season ID
+      if (requestType === 'soccer-season-schedule') {
+        const seasonId = formData.SeasonID;
+
+        if (!seasonId) {
+          return null;
+        }
+
+        return `https://api.sportradar.com/soccer-extended/production/v4/en/seasons/sr:season:${seasonId}/schedules.json?api_key=1xvTXAAxCa7D4kP4dzQ1E4XXobYFrjAi7r3lZeH4`;
+      }
     }
 
     return null;
