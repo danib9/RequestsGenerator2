@@ -4,30 +4,43 @@ import FormField from './FormField';
 import { requestTypesConfig } from '../config/requestTypesConfig';
 import { dsgRequestTypesConfig } from '../config/dsgRequestTypesConfig';
 import { optaRequestTypesConfig } from '../config/optaRequestTypesConfig';
-import { sportRadarRequestTypesConfig } from '../config/sportRadarConfig';
+import { sportRadarRequestTypesConfig, sportRadarCategoryOptions } from '../config/sportRadarConfig';
 import { optaStandingsConfig } from '../config/optaStandingsConfig';
 
 const RequestsGenerator: React.FC = () => {
   const [formData, setFormData] = useState<Record<string, string>>({
     source: '',
     environment: '',
+    sportRadarCategory: '',
     requestType: ''
   });
 
   const [editableUrl, setEditableUrl] = useState<string>('');
   const [showCopyNotification, setShowCopyNotification] = useState<boolean>(false);
 
+  const coreFormFields = ['source', 'environment', 'sportRadarCategory', 'requestType'];
+
   const updateFormField = (field: string, value: string) => {
     setFormData(prev => {
       const newData = { ...prev, [field]: value };
       
       // Clear dependent fields when source changes
-      if (field === 'source' && value !== '365scores-ds') {
+      if (field === 'source') {
         newData.environment = '';
+        newData.sportRadarCategory = '';
         newData.requestType = '';
-        // Clear all request-specific parameters
         Object.keys(prev).forEach(key => {
-          if (!['source', 'environment', 'requestType'].includes(key)) {
+          if (!coreFormFields.includes(key)) {
+            newData[key] = '';
+          }
+        });
+      }
+
+      // Clear request type when SportRadar sport category changes
+      if (field === 'sportRadarCategory') {
+        newData.requestType = '';
+        Object.keys(prev).forEach(key => {
+          if (!coreFormFields.includes(key)) {
             newData[key] = '';
           }
         });
@@ -36,7 +49,7 @@ const RequestsGenerator: React.FC = () => {
       // Clear request-specific parameters when request type changes
       if (field === 'requestType') {
         Object.keys(prev).forEach(key => {
-          if (!['source', 'environment', 'requestType'].includes(key)) {
+          if (!coreFormFields.includes(key)) {
             newData[key] = '';
           }
         });
@@ -55,6 +68,7 @@ const RequestsGenerator: React.FC = () => {
     setFormData({
       source: '',
       environment: '',
+      sportRadarCategory: '',
       requestType: ''
     });
     setEditableUrl('');
@@ -570,6 +584,53 @@ const RequestsGenerator: React.FC = () => {
 
         return `https://api.sportradar.com/soccer-extended/production/v4/en/seasons/sr:season:${seasonId}/schedules.json?api_key=1xvTXAAxCa7D4kP4dzQ1E4XXobYFrjAi7r3lZeH4`;
       }
+
+      // Tennis: All Competitions Per Day
+      if (requestType === 'tennis-all-competitions-per-day') {
+        const date = formData.Date;
+
+        if (!date) {
+          return null;
+        }
+
+        return `https://api.sportradar.us/tennis/trial/v3/en/schedules/${date}/summaries.json?api_key=hdq7wcu8xkavawwtjjgp2hpp`;
+      }
+
+      // Tennis: Game Data
+      if (requestType === 'tennis-game-data') {
+        const gameId = formData.GameID;
+
+        if (!gameId) {
+          return null;
+        }
+
+        return `https://api.sportradar.us/tennis/trial/v3/en/sport_events/sr:sport_event:${gameId}/timeline.json?api_key=hdq7wcu8xkavawwtjjgp2hpp`;
+      }
+
+      // Tennis: Tennis Ranking
+      if (requestType === 'tennis-ranking') {
+        return `https://api.sportradar.com/tennis/production/v3/en/rankings.json?api_key=YcAsBnwfaN6VSjPlm6dsj4Hjr5o9hd0c8s1c1g6p`;
+      }
+
+      // Tennis: All Tennis Competitions
+      if (requestType === 'tennis-all-competitions') {
+        return `https://api.sportradar.com/tennis/production/v3/en/competitions.json?api_key=YcAsBnwfaN6VSjPlm6dsj4Hjr5o9hd0c8s1c1g6p`;
+      }
+
+      // Tennis: All Women's Competitions
+      if (requestType === 'tennis-womens-competitions') {
+        return `https://api.sportradar.com/tennis/production/v3/en/competitions/sr%3Acompetition%3A2553/info.json?api_key=YcAsBnwfaN6VSjPlm6dsj4Hjr5o9hd0c8s1c1g6p`;
+      }
+
+      // Tennis: All Seasons
+      if (requestType === 'tennis-all-seasons') {
+        return `https://api.sportradar.com/tennis/production/v3/en/competitions/sr%3Acompetition%3A2555/seasons.json?api_key=YcAsBnwfaN6VSjPlm6dsj4Hjr5o9hd0c8s1c1g6p`;
+      }
+
+      // Tennis: All Season Data
+      if (requestType === 'tennis-all-season-data') {
+        return `https://api.sportradar.com/tennis/production/v3/en/seasons/sr%3Aseason%3A120983/info.json?api_key=YcAsBnwfaN6VSjPlm6dsj4Hjr5o9hd0c8s1c1g6p`;
+      }
     }
 
     return null;
@@ -616,10 +677,16 @@ const RequestsGenerator: React.FC = () => {
     }
     
     if (formData.source === 'sportRadar') {
-      return sportRadarRequestTypesConfig.map(config => ({
-        value: config.id,
-        label: config.label
-      }));
+      if (!formData.sportRadarCategory) {
+        return [];
+      }
+
+      return sportRadarRequestTypesConfig
+        .filter(config => config.sportCategory === formData.sportRadarCategory)
+        .map(config => ({
+          value: config.id,
+          label: config.label
+        }));
     }
     
     return [];
@@ -670,7 +737,7 @@ const RequestsGenerator: React.FC = () => {
     }
     
     if (formData.source === 'sportRadar') {
-      return formData.requestType;
+      return formData.sportRadarCategory && formData.requestType;
     }
     
     return false;
@@ -819,14 +886,28 @@ const RequestsGenerator: React.FC = () => {
           )}
           
           {formData.source === 'sportRadar' && (
-            <FormField
-              label="Request type"
-              value={formData.requestType}
-              placeholder="Select request"
-              required
-              options={requestTypeOptions}
-              onChange={(value) => updateFormField('requestType', value)}
-            />
+            <>
+              <FormField
+                label="Sport Type"
+                value={formData.sportRadarCategory}
+                placeholder="Select sport type"
+                required
+                options={sportRadarCategoryOptions}
+                disabledOptions={[]}
+                onChange={(value) => updateFormField('sportRadarCategory', value)}
+              />
+
+              {formData.sportRadarCategory && (
+                <FormField
+                  label="Request type"
+                  value={formData.requestType}
+                  placeholder="Select request"
+                  required
+                  options={requestTypeOptions}
+                  onChange={(value) => updateFormField('requestType', value)}
+                />
+              )}
+            </>
           )}
           
           {/* Render parameters in order: Unique, Shared, Core */}
