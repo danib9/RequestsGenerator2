@@ -298,7 +298,7 @@ const RequestsGenerator: React.FC = () => {
           return null;
         }
         
-        return `${requestConfig.baseUrl}/${sportType.toLowerCase()}/get_matches?type=match&id=${dsgMatchPID}&client=365scores&authkey=20HY4kxTKp9UbiMV7wuyqOs8WfjPBZmgndo`;
+        return `${requestConfig.baseUrl}/${sportType.toLowerCase()}/get_matches?type=match&id=${dsgMatchPID}&client=365scores&authkey=20HY4kxTKp9UbiMV7wuyqOs8WfjPBZmgndo&ftype=json`;
       }
       
       // For DSG Daily Matches request, build the URL with sport type and date
@@ -310,7 +310,7 @@ const RequestsGenerator: React.FC = () => {
           return null;
         }
         
-        return `${requestConfig.baseUrl}/${sportType.toLowerCase()}/get_matches_day?day=${date}&client=365scores&authkey=20HY4kxTKp9UbiMV7wuyqOs8WfjPBZmgndo`;
+        return `${requestConfig.baseUrl}/${sportType.toLowerCase()}/get_matches_day?day=${date}&client=365scores&authkey=20HY4kxTKp9UbiMV7wuyqOs8WfjPBZmgndo&ftype=json`;
       }
       
       // For DSG Team Squad request, build the URL with sport type and team ID
@@ -322,7 +322,7 @@ const RequestsGenerator: React.FC = () => {
           return null;
         }
         
-        return `${requestConfig.baseUrl}/${sportType.toLowerCase()}/get_squad?team=${teamId}&client=365scores&authkey=20HY4kxTKp9UbiMV7wuyqOs8WfjPBZmgndo`;
+        return `${requestConfig.baseUrl}/${sportType.toLowerCase()}/get_squad?team=${teamId}&client=365scores&authkey=20HY4kxTKp9UbiMV7wuyqOs8WfjPBZmgndo&ftype=json`;
       }
       
       // For DSG Player Request, build the URL with sport type and player ID
@@ -334,7 +334,7 @@ const RequestsGenerator: React.FC = () => {
           return null;
         }
         
-        return `${requestConfig.baseUrl}/${sportType.toLowerCase()}/get_peoples?id=${playerId}&client=365scores&authkey=20HY4kxTKp9UbiMV7wuyqOs8WfjPBZmgndo`;
+        return `${requestConfig.baseUrl}/${sportType.toLowerCase()}/get_peoples?id=${playerId}&client=365scores&authkey=20HY4kxTKp9UbiMV7wuyqOs8WfjPBZmgndo&ftype=json`;
       }
     }
 

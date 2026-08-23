@@ -14,11 +14,19 @@ export interface DSGRequestConfig {
   }>;
 }
 
+const dsgSportTypeOptions = [
+  { value: 'soccer', label: 'Soccer' },
+  { value: 'football', label: 'A. Football' },
+  { value: 'basketball', label: 'Basketball' },
+  { value: 'hockey', label: 'Hockey' },
+  { value: 'baseball', label: 'Baseball' }
+];
+
 export const dsgRequestTypesConfig: DSGRequestConfig[] = [
   {
     id: 'game',
     label: 'Game',
-    baseUrl: 'https://api.sportradar.com',
+    baseUrl: 'https://dsg-api.com/clients/365scores',
     parameters: [
       {
         key: 'sportType',
@@ -26,12 +34,7 @@ export const dsgRequestTypesConfig: DSGRequestConfig[] = [
         type: 'select',
         required: true,
         category: 'shared',
-        options: [
-          { value: 'football', label: 'Football' },
-          { value: 'basketball', label: 'Basketball' },
-          { value: 'hockey', label: 'Hockey' },
-          { value: 'baseball', label: 'Baseball' }
-        ]
+        options: dsgSportTypeOptions
       },
       {
         key: 'dsgMatchPID',
@@ -46,7 +49,7 @@ export const dsgRequestTypesConfig: DSGRequestConfig[] = [
   {
     id: 'daily-matches',
     label: 'Daily Matches',
-    baseUrl: 'https://api.sportradar.com',
+    baseUrl: 'https://dsg-api.com/clients/365scores',
     parameters: [
       {
         key: 'sportType',
@@ -54,12 +57,7 @@ export const dsgRequestTypesConfig: DSGRequestConfig[] = [
         type: 'select',
         required: true,
         category: 'shared',
-        options: [
-          { value: 'football', label: 'Football' },
-          { value: 'basketball', label: 'Basketball' },
-          { value: 'hockey', label: 'Hockey' },
-          { value: 'baseball', label: 'Baseball' }
-        ]
+        options: dsgSportTypeOptions
       },
       {
         key: 'date',
@@ -74,7 +72,7 @@ export const dsgRequestTypesConfig: DSGRequestConfig[] = [
   {
     id: 'team-squad',
     label: 'Team Squad',
-    baseUrl: 'https://api.sportradar.com',
+    baseUrl: 'https://dsg-api.com/clients/365scores',
     parameters: [
       {
         key: 'sportType',
@@ -82,12 +80,7 @@ export const dsgRequestTypesConfig: DSGRequestConfig[] = [
         type: 'select',
         required: true,
         category: 'shared',
-        options: [
-          { value: 'football', label: 'Football' },
-          { value: 'basketball', label: 'Basketball' },
-          { value: 'hockey', label: 'Hockey' },
-          { value: 'baseball', label: 'Baseball' }
-        ]
+        options: dsgSportTypeOptions
       },
       {
         key: 'Team_ID',
@@ -102,7 +95,7 @@ export const dsgRequestTypesConfig: DSGRequestConfig[] = [
   {
     id: 'player-request',
     label: 'Player Request',
-    baseUrl: 'https://api.sportradar.com',
+    baseUrl: 'https://dsg-api.com/clients/365scores',
     parameters: [
       {
         key: 'sportType',
@@ -110,12 +103,7 @@ export const dsgRequestTypesConfig: DSGRequestConfig[] = [
         type: 'select',
         required: true,
         category: 'shared',
-        options: [
-          { value: 'football', label: 'Football' },
-          { value: 'basketball', label: 'Basketball' },
-          { value: 'hockey', label: 'Hockey' },
-          { value: 'baseball', label: 'Baseball' }
-        ]
+        options: dsgSportTypeOptions
       },
       {
         key: 'Player_ID',
