@@ -1,15 +1,6 @@
-export type SportRadarCategory = 'football' | 'tennis' | 'us-sports';
-
-export const sportRadarCategoryOptions: Array<{ value: SportRadarCategory; label: string }> = [
-  { value: 'football', label: 'Football' },
-  { value: 'tennis', label: 'Tennis' },
-  { value: 'us-sports', label: 'US Sports' }
-];
-
 export interface SportRadarRequestConfig {
   id: string;
   label: string;
-  sportCategory: SportRadarCategory;
   baseUrl: string;
   endpoint?: string;
   parameters: Array<{
@@ -27,7 +18,6 @@ export const sportRadarRequestTypesConfig: SportRadarRequestConfig[] = [
   {
     id: 'daily-schedule',
     label: 'Daily Schedule',
-    sportCategory: 'us-sports',
     baseUrl: 'https://api.sportradar.com',
     parameters: [
       {
@@ -57,7 +47,6 @@ export const sportRadarRequestTypesConfig: SportRadarRequestConfig[] = [
   {
     id: 'sport-event',
     label: 'Sport Event',
-    sportCategory: 'us-sports',
     baseUrl: 'https://api.sportradar.us',
     parameters: [
       {
@@ -73,7 +62,6 @@ export const sportRadarRequestTypesConfig: SportRadarRequestConfig[] = [
   {
     id: 'game-boxscore',
     label: 'Game Boxscore',
-    sportCategory: 'us-sports',
     baseUrl: 'https://api.sportradar.com/nfl/official/production/v7/en/games',
     parameters: [
       {
@@ -100,7 +88,6 @@ export const sportRadarRequestTypesConfig: SportRadarRequestConfig[] = [
   {
     id: 'season-schedule',
     label: 'Season Schedule',
-    sportCategory: 'us-sports',
     baseUrl: 'https://api.sportradar.com/nfl/official/production/v7/en/games',
     parameters: [
       {
@@ -139,7 +126,6 @@ export const sportRadarRequestTypesConfig: SportRadarRequestConfig[] = [
   {
     id: 'game-summary',
     label: 'Game Summary',
-    sportCategory: 'us-sports',
     baseUrl: 'https://api.sportradar.com',
     parameters: [
       {
@@ -180,7 +166,6 @@ export const sportRadarRequestTypesConfig: SportRadarRequestConfig[] = [
   {
     id: 'play-by-play',
     label: 'Play by Play',
-    sportCategory: 'us-sports',
     baseUrl: 'https://api.sportradar.com',
     parameters: [
       {
@@ -210,32 +195,8 @@ export const sportRadarRequestTypesConfig: SportRadarRequestConfig[] = [
     ]
   },
   {
-    id: 'all-competitions',
-    label: 'All Competitions',
-    sportCategory: 'football',
-    baseUrl: 'https://api.sportradar.com/soccer-extended/trial/v4/en/competitions.json',
-    parameters: []
-  },
-  {
-    id: 'lineups',
-    label: 'Lineups',
-    sportCategory: 'football',
-    baseUrl: 'https://api.sportradar.com/soccer-extended/trial/v4/en/sport_events',
-    parameters: [
-      {
-        key: 'GameID',
-        label: 'Game ID',
-        type: 'text',
-        required: true,
-        category: 'shared',
-        placeholder: 'Enter Game ID'
-      }
-    ]
-  },
-  {
     id: 'standings',
     label: 'Standings',
-    sportCategory: 'us-sports',
     baseUrl: 'https://api.sportradar.com',
     parameters: [
       {
@@ -280,25 +241,8 @@ export const sportRadarRequestTypesConfig: SportRadarRequestConfig[] = [
     ]
   },
   {
-    id: 'daily-summaries',
-    label: 'Daily Summaries',
-    sportCategory: 'football',
-    baseUrl: 'https://api.sportradar.com/soccer/trial/v4/en/schedules',
-    parameters: [
-      {
-        key: 'Date',
-        label: 'Date',
-        type: 'date',
-        required: true,
-        category: 'shared',
-        placeholder: 'Select date'
-      }
-    ]
-  },
-  {
     id: 'team-profile',
     label: 'Team Profile',
-    sportCategory: 'us-sports',
     baseUrl: 'https://api.sportradar.com',
     parameters: [
       {
@@ -326,25 +270,8 @@ export const sportRadarRequestTypesConfig: SportRadarRequestConfig[] = [
     ]
   },
   {
-    id: 'advanced-analytics',
-    label: 'Advanced Analytics',
-    sportCategory: 'football',
-    baseUrl: 'https://api.sportradar.com/soccer-extended/trial/v4/en/sport_events',
-    parameters: [
-      {
-        key: 'GameID',
-        label: 'Game ID',
-        type: 'text',
-        required: true,
-        category: 'shared',
-        placeholder: 'Enter Game ID'
-      }
-    ]
-  },
-  {
     id: 'player-profile',
     label: 'Player Profile',
-    sportCategory: 'us-sports',
     baseUrl: 'https://api.sportradar.com',
     parameters: [
       {
@@ -374,7 +301,6 @@ export const sportRadarRequestTypesConfig: SportRadarRequestConfig[] = [
   {
     id: 'game-statistics',
     label: 'Game Statistics',
-    sportCategory: 'us-sports',
     baseUrl: 'https://api.sportradar.com',
     parameters: [
       {
@@ -401,7 +327,6 @@ export const sportRadarRequestTypesConfig: SportRadarRequestConfig[] = [
   {
     id: 'current-week-schedule',
     label: 'Current Week Schedule',
-    sportCategory: 'us-sports',
     baseUrl: 'https://api.sportradar.com',
     parameters: [
       {
@@ -415,88 +340,5 @@ export const sportRadarRequestTypesConfig: SportRadarRequestConfig[] = [
         ]
       }
     ]
-  },
-  {
-    id: 'soccer-season-schedule',
-    label: 'Season Schedule',
-    sportCategory: 'football',
-    baseUrl: 'https://api.sportradar.com/soccer-extended/production/v4/en/seasons',
-    parameters: [
-      {
-        key: 'SeasonID',
-        label: 'Season ID',
-        type: 'text',
-        required: true,
-        category: 'shared',
-        placeholder: 'Enter Season ID'
-      }
-    ]
-  },
-  {
-    id: 'tennis-all-competitions-per-day',
-    label: 'All Competitions Per Day',
-    sportCategory: 'tennis',
-    baseUrl: 'https://api.sportradar.us/tennis/trial/v3/en/schedules',
-    parameters: [
-      {
-        key: 'Date',
-        label: 'Date',
-        type: 'date',
-        required: true,
-        category: 'unique',
-        placeholder: 'Select date'
-      }
-    ]
-  },
-  {
-    id: 'tennis-game-data',
-    label: 'Game Data',
-    sportCategory: 'tennis',
-    baseUrl: 'https://api.sportradar.us/tennis/trial/v3/en/sport_events',
-    parameters: [
-      {
-        key: 'GameID',
-        label: 'Game ID',
-        type: 'text',
-        required: true,
-        category: 'shared',
-        placeholder: 'Enter Game ID'
-      }
-    ]
-  },
-  {
-    id: 'tennis-ranking',
-    label: 'Tennis Ranking',
-    sportCategory: 'tennis',
-    baseUrl: 'https://api.sportradar.com/tennis/production/v3/en/rankings.json',
-    parameters: []
-  },
-  {
-    id: 'tennis-all-competitions',
-    label: 'All Tennis Competitions',
-    sportCategory: 'tennis',
-    baseUrl: 'https://api.sportradar.com/tennis/production/v3/en/competitions.json',
-    parameters: []
-  },
-  {
-    id: 'tennis-womens-competitions',
-    label: "All Women's Competitions",
-    sportCategory: 'tennis',
-    baseUrl: 'https://api.sportradar.com/tennis/production/v3/en/competitions/sr:competition:2553/info.json',
-    parameters: []
-  },
-  {
-    id: 'tennis-all-seasons',
-    label: 'All Seasons',
-    sportCategory: 'tennis',
-    baseUrl: 'https://api.sportradar.com/tennis/production/v3/en/competitions/sr:competition:2555/seasons.json',
-    parameters: []
-  },
-  {
-    id: 'tennis-all-season-data',
-    label: 'All Season Data',
-    sportCategory: 'tennis',
-    baseUrl: 'https://api.sportradar.com/tennis/production/v3/en/seasons/sr:season:120983/info.json',
-    parameters: []
   }
 ];
