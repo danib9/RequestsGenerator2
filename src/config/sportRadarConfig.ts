@@ -340,5 +340,11 @@ export const sportRadarRequestTypesConfig: SportRadarRequestConfig[] = [
         ]
       }
     ]
+  },
+  {
+    id: 'lmt',
+    label: 'LMT',
+    baseUrl: 'https://feed.mapi.sportradar.com/json/matchTree',
+    parameters: []
   }
 ];

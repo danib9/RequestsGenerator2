@@ -32,7 +32,7 @@ const RequestsGenerator: React.FC = () => {
           }
         });
       }
-      
+
       // Clear request-specific parameters when request type changes
       if (field === 'requestType') {
         Object.keys(prev).forEach(key => {
@@ -254,7 +254,7 @@ const RequestsGenerator: React.FC = () => {
           return null;
         }
         
-        return `https://api.performfeeds.com/soccerdata/matchstats/137iv2fgxqg281d2xtb1pl4oyi/${optaPID}?_fmt=json&_rt=b&detailed=yes`;
+        return `https://api.performfeeds.com/soccerdata/matchstats/137iv2fgxqg281d2xtb1pl4oyi/${optaPID}?_fmt=json&_rt=b&detailed=fallback`;
       }
       
       // For Opta Match xG, replace the Opta PID in the URL
@@ -520,6 +520,11 @@ const RequestsGenerator: React.FC = () => {
         }
         
         return `https://api.sportradar.com/${competition}/production/v7/en/games/current_week/schedule.json?api_key=1xvTXAAxCa7D4kP4dzQ1E4XXobYFrjAi7r3lZeH4`;
+      }
+
+      // For SportRadar LMT (Football), return the fixed matchTree URL
+      if (requestType === 'lmt') {
+        return 'https://feed.mapi.sportradar.com/json/matchTree?appKey=4f5cbfc2b0c34925af1cf3ebdc4d32e9';
       }
     }
 
