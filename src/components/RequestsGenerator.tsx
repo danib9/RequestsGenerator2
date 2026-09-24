@@ -6,6 +6,7 @@ import { dsgRequestTypesConfig } from '../config/dsgRequestTypesConfig';
 import { optaRequestTypesConfig } from '../config/optaRequestTypesConfig';
 import { sportRadarRequestTypesConfig, sportRadarCategoryOptions } from '../config/sportRadarConfig';
 import { optaStandingsConfig } from '../config/optaStandingsConfig';
+import { futbol24RequestTypesConfig } from '../config/futbol24RequestTypesConfig';
 
 const RequestsGenerator: React.FC = () => {
   const [formData, setFormData] = useState<Record<string, string>>({
@@ -338,6 +339,19 @@ const RequestsGenerator: React.FC = () => {
       }
     }
 
+    // Handle Futbol24 requests
+    if (source === 'futbol24') {
+      if (requestType === 'daily-matches') {
+        const sportType = formData.sportType;
+        const date = formData.date;
+
+        if (!sportType || !date) {
+          return null;
+        }
+
+        return `https://www.futbol24.com/api/live/matches?_=0&date=${date}T00:00:00%2B00:00&lang=en&sort=kickoff`;
+      }
+    }
 
     // Handle SportRadar requests
     if (source === 'sportRadar') {
@@ -680,6 +694,13 @@ const RequestsGenerator: React.FC = () => {
         label: config.label
       }));
     }
+
+    if (formData.source === 'futbol24') {
+      return futbol24RequestTypesConfig.map(config => ({
+        value: config.id,
+        label: config.label
+      }));
+    }
     
     if (formData.source === 'sportRadar') {
       if (!formData.sportRadarCategory) {
@@ -716,6 +737,10 @@ const RequestsGenerator: React.FC = () => {
     if (formData.source === 'dsg') {
       return dsgRequestTypesConfig.find(config => config.id === formData.requestType);
     }
+
+    if (formData.source === 'futbol24') {
+      return futbol24RequestTypesConfig.find(config => config.id === formData.requestType);
+    }
     
     if (formData.source === 'sportRadar') {
       return sportRadarRequestTypesConfig.find(config => config.id === formData.requestType);
@@ -738,6 +763,10 @@ const RequestsGenerator: React.FC = () => {
     }
     
     if (formData.source === 'dsg') {
+      return formData.requestType;
+    }
+
+    if (formData.source === 'futbol24') {
       return formData.requestType;
     }
     
@@ -788,7 +817,8 @@ const RequestsGenerator: React.FC = () => {
     { value: '365scores-ds', label: '365Scores DS' },
     { value: 'opta', label: 'Opta' },
     { value: 'dsg', label: 'DSG' },
-    { value: 'sportRadar', label: 'SportRadar' }
+    { value: 'sportRadar', label: 'SportRadar' },
+    { value: 'futbol24', label: 'Futbol24' }
   ];
 
   const environmentOptions = [
@@ -880,6 +910,17 @@ const RequestsGenerator: React.FC = () => {
           )}
           
           {formData.source === 'dsg' && (
+            <FormField
+              label="Request type"
+              value={formData.requestType}
+              placeholder="Select request"
+              required
+              options={requestTypeOptions}
+              onChange={(value) => updateFormField('requestType', value)}
+            />
+          )}
+
+          {formData.source === 'futbol24' && (
             <FormField
               label="Request type"
               value={formData.requestType}
