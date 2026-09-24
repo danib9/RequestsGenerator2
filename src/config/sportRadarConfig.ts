@@ -1,4 +1,4 @@
-﻿export type SportRadarCategory = 'football' | 'tennis' | 'us-sports';
+export type SportRadarCategory = 'football' | 'tennis' | 'us-sports';
 
 export const sportRadarCategoryOptions: Array<{ value: SportRadarCategory; label: string }> = [
   { value: 'football', label: 'Football' },
