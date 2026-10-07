@@ -1,41 +1,56 @@
 import React, { useState } from 'react';
 import { Copy, ExternalLink, Trash2 } from 'lucide-react';
 import FormField from './FormField';
-import { requestTypesConfig, dsgRequestTypesConfig } from '../config/requestTypesConfig';
+import { requestTypesConfig } from '../config/requestTypesConfig';
+import { dsgRequestTypesConfig } from '../config/dsgRequestTypesConfig';
 import { optaRequestTypesConfig } from '../config/optaRequestTypesConfig';
-import { sportRadarRequestTypesConfig } from '../config/sportRadarConfig';
+import { sportRadarRequestTypesConfig, sportRadarCategoryOptions } from '../config/sportRadarConfig';
 import { optaStandingsConfig } from '../config/optaStandingsConfig';
+import { futbol24RequestTypesConfig } from '../config/futbol24RequestTypesConfig';
 
 const RequestsGenerator: React.FC = () => {
   const [formData, setFormData] = useState<Record<string, string>>({
     source: '',
     environment: '',
+    sportRadarCategory: '',
     requestType: ''
   });
 
   const [editableUrl, setEditableUrl] = useState<string>('');
   const [showCopyNotification, setShowCopyNotification] = useState<boolean>(false);
 
+  const coreFormFields = ['source', 'environment', 'sportRadarCategory', 'requestType'];
+
   const updateFormField = (field: string, value: string) => {
     setFormData(prev => {
       const newData = { ...prev, [field]: value };
       
       // Clear dependent fields when source changes
-      if (field === 'source' && value !== '365scores-ds') {
+      if (field === 'source') {
         newData.environment = '';
+        newData.sportRadarCategory = '';
         newData.requestType = '';
-        // Clear all request-specific parameters
         Object.keys(prev).forEach(key => {
-          if (!['source', 'environment', 'requestType'].includes(key)) {
+          if (!coreFormFields.includes(key)) {
             newData[key] = '';
           }
         });
       }
-      
+
+      // Clear request type when SportRadar sport category changes
+      if (field === 'sportRadarCategory') {
+        newData.requestType = '';
+        Object.keys(prev).forEach(key => {
+          if (!coreFormFields.includes(key)) {
+            newData[key] = '';
+          }
+        });
+      }
+
       // Clear request-specific parameters when request type changes
       if (field === 'requestType') {
         Object.keys(prev).forEach(key => {
-          if (!['source', 'environment', 'requestType'].includes(key)) {
+          if (!coreFormFields.includes(key)) {
             newData[key] = '';
           }
         });
@@ -54,6 +69,7 @@ const RequestsGenerator: React.FC = () => {
     setFormData({
       source: '',
       environment: '',
+      sportRadarCategory: '',
       requestType: ''
     });
     setEditableUrl('');
@@ -105,7 +121,14 @@ const RequestsGenerator: React.FC = () => {
         }
       });
 
-      const fullUrl = `${requestConfig.baseUrl}${requestConfig.endpoint}${queryParts.length ? '?' + queryParts.join('&') : ''}`;
+      // Handle environment-specific URL generation
+      let baseUrl = requestConfig.baseUrl;
+      if (environment !== 'production') {
+        // Replace 'mobileapi' with the QA environment
+        baseUrl = baseUrl.replace('mobileapi.365scores.com', `${environment}.365scores.com`);
+      }
+      
+      const fullUrl = `${baseUrl}${requestConfig.endpoint}${queryParts.length ? '?' + queryParts.join('&') : ''}`;
       return fullUrl;
     }
     
@@ -246,7 +269,7 @@ const RequestsGenerator: React.FC = () => {
           return null;
         }
         
-        return `https://api.performfeeds.com/soccerdata/matchstats/8a46333n0iqf19n7oh3f1953y/${optaPID}?_fmt=json&_rt=b&detailed=yes`;
+        return `https://api.performfeeds.com/soccerdata/matchstats/137iv2fgxqg281d2xtb1pl4oyi/${optaPID}?_fmt=json&_rt=b&detailed=fallback`;
       }
       
       // For Opta Match xG, replace the Opta PID in the URL
@@ -256,7 +279,7 @@ const RequestsGenerator: React.FC = () => {
           return null;
         }
         
-        return `https://api.performfeeds.com/soccerdata/matchexpectedgoals/8a46333n0iqf19n7oh3f1953y/${optaPID}?_rt=b&_fmt=json`;
+        return `https://api.performfeeds.com/soccerdata/matchexpectedgoals/137iv2fgxqg281d2xtb1pl4oyi/${optaPID}?_rt=b&_fmt=json`;
       }
     }
 
@@ -316,6 +339,19 @@ const RequestsGenerator: React.FC = () => {
       }
     }
 
+    // Handle Futbol24 requests
+    if (source === 'futbol24') {
+      if (requestType === 'daily-matches') {
+        const sportType = formData.sportType;
+        const date = formData.date;
+
+        if (!sportType || !date) {
+          return null;
+        }
+
+        return `https://www.futbol24.com/api/live/matches?_=0&date=${date}T00:00:00%2B00:00&lang=en&sort=kickoff`;
+      }
+    }
 
     // Handle SportRadar requests
     if (source === 'sportRadar') {
@@ -403,6 +439,116 @@ const RequestsGenerator: React.FC = () => {
         
         return `https://api.sportradar.com/${competition}/production/${apiVersion}/en/games/${sportRadarPID}/${summaryType}.json?api_key=1xvTXAAxCa7D4kP4dzQ1E4XXobYFrjAi7r3lZeH4`;
       }
+      
+      // For SportRadar Play by Play request, build the URL with competition, version, and game PID
+      if (requestType === 'play-by-play') {
+        const competition = formData.DSGCompetition;
+        const gamePID = formData.DSGGamePID;
+        
+        if (!competition || !gamePID) {
+          return null;
+        }
+        
+        // Determine version based on competition
+        const version = ['nfl', 'ncaafb', 'nhl'].includes(competition) ? 'v7' : 'v8';
+        
+        // NFL uses "official" in the URL path, all other competitions do not
+        const urlPath = competition === 'nfl' 
+          ? `${competition}/official/production/${version}/en/games/${gamePID}/pbp.json`
+          : `${competition}/production/${version}/en/games/${gamePID}/pbp.json`;
+        
+        return `https://api.sportradar.com/${urlPath}?api_key=1xvTXAAxCa7D4kP4dzQ1E4XXobYFrjAi7r3lZeH4`;
+      }
+      
+      // For SportRadar Standings request, build the URL with competition, season year, and season type
+      if (requestType === 'standings') {
+        const competition = formData.DSGCompetition;
+        const seasonYear = formData.SeasonYear;
+        const seasonType = formData.SeasonType;
+        
+        if (!competition || !seasonYear || !seasonType) {
+          return null;
+        }
+        
+        // Determine version based on competition
+        const version = ['nfl', 'nhl'].includes(competition) ? 'v7' : 'v8';
+        
+        // NFL uses "official" in the URL path, all other competitions do not
+        // Also, NFL uses different endpoint structure
+        if (competition === 'nfl') {
+          return `https://api.sportradar.com/${competition}/official/production/${version}/en/seasons/${seasonYear}/${seasonType}/standings/season.json?api_key=1xvTXAAxCa7D4kP4dzQ1E4XXobYFrjAi7r3lZeH4`;
+        } else {
+          return `https://api.sportradar.com/${competition}/production/${version}/en/seasons/${seasonYear}/${seasonType}/standings.json?api_key=1xvTXAAxCa7D4kP4dzQ1E4XXobYFrjAi7r3lZeH4`;
+        }
+      }
+      
+      // For SportRadar Team Profile request, build the URL with competition and team PID
+      if (requestType === 'team-profile') {
+        const competition = formData.DSGCompetition;
+        const teamPID = formData.DSGTeamPID;
+        
+        if (!competition || !teamPID) {
+          return null;
+        }
+        
+        // Determine version based on competition
+        const version = ['nfl', 'nhl'].includes(competition) ? 'v7' : 'v8';
+        
+        // NFL uses "official" in the URL path, all other competitions do not
+        const urlPath = competition === 'nfl' 
+          ? `${competition}/official/production/${version}/en/teams/${teamPID}/profile.json`
+          : `${competition}/production/${version}/en/teams/${teamPID}/profile.json`;
+        
+        return `https://api.sportradar.com/${urlPath}?api_key=1xvTXAAxCa7D4kP4dzQ1E4XXobYFrjAi7r3lZeH4`;
+      }
+      
+      // For SportRadar Player Profile request, build the URL with competition and player PID
+      if (requestType === 'player-profile') {
+        const competition = formData.DSGCompetition;
+        const playerPID = formData.DSGPlayerPID;
+        
+        if (!competition || !playerPID) {
+          return null;
+        }
+        
+        // Determine version based on competition
+        const version = ['nfl', 'nhl'].includes(competition) ? 'v7' : 'v8';
+        
+        // NFL uses "official" in the URL path, all other competitions do not
+        const urlPath = competition === 'nfl' 
+          ? `${competition}/official/production/${version}/en/players/${playerPID}/profile.json`
+          : `${competition}/production/${version}/en/players/${playerPID}/profile.json`;
+        
+        return `https://api.sportradar.com/${urlPath}?api_key=1xvTXAAxCa7D4kP4dzQ1E4XXobYFrjAi7r3lZeH4`;
+      }
+      
+      // For SportRadar Game Statistics request, build the URL with competition and game PID
+      if (requestType === 'game-statistics') {
+        const competition = formData.DSGCompetition;
+        const gamePID = formData.DSGGamePID;
+        
+        if (!competition || !gamePID) {
+          return null;
+        }
+        
+        // NFL uses "official" in the URL path, NCAAF does not
+        const urlPath = competition === 'nfl' 
+          ? `${competition}/official/production/v7/en/games/${gamePID}/statistics.json`
+          : `${competition}/production/v7/en/games/${gamePID}/statistics.json`;
+        
+        return `https://api.sportradar.com/${urlPath}?api_key=1xvTXAAxCa7D4kP4dzQ1E4XXobYFrjAi7r3lZeH4`;
+      }
+      
+      // For SportRadar Current Week Schedule request, build the URL with competition
+      if (requestType === 'current-week-schedule') {
+        const competition = formData.DSGCompetition;
+        
+        if (!competition) {
+          return null;
+        }
+        
+        return `https://api.sportradar.com/${competition}/production/v7/en/games/current_week/schedule.json?api_key=1xvTXAAxCa7D4kP4dzQ1E4XXobYFrjAi7r3lZeH4`;
+      }
 
       // For SportRadar All Competitions, return the fixed URL
       if (requestType === 'all-competitions') {
@@ -452,6 +598,58 @@ const RequestsGenerator: React.FC = () => {
 
         return `https://api.sportradar.com/soccer-extended/production/v4/en/seasons/sr:season:${seasonId}/schedules.json?api_key=1xvTXAAxCa7D4kP4dzQ1E4XXobYFrjAi7r3lZeH4`;
       }
+
+      // For SportRadar LMT (Football), return the fixed matchTree URL
+      if (requestType === 'lmt') {
+        return 'https://feed.mapi.sportradar.com/json/matchTree?appKey=4f5cbfc2b0c34925af1cf3ebdc4d32e9';
+      }
+
+      // Tennis: All Competitions Per Day
+      if (requestType === 'tennis-all-competitions-per-day') {
+        const date = formData.Date;
+
+        if (!date) {
+          return null;
+        }
+
+        return `https://api.sportradar.us/tennis/trial/v3/en/schedules/${date}/summaries.json?api_key=hdq7wcu8xkavawwtjjgp2hpp`;
+      }
+
+      // Tennis: Game Data
+      if (requestType === 'tennis-game-data') {
+        const gameId = formData.GameID;
+
+        if (!gameId) {
+          return null;
+        }
+
+        return `https://api.sportradar.us/tennis/trial/v3/en/sport_events/sr:sport_event:${gameId}/timeline.json?api_key=hdq7wcu8xkavawwtjjgp2hpp`;
+      }
+
+      // Tennis: Tennis Ranking
+      if (requestType === 'tennis-ranking') {
+        return `https://api.sportradar.com/tennis/production/v3/en/rankings.json?api_key=YcAsBnwfaN6VSjPlm6dsj4Hjr5o9hd0c8s1c1g6p`;
+      }
+
+      // Tennis: All Tennis Competitions
+      if (requestType === 'tennis-all-competitions') {
+        return `https://api.sportradar.com/tennis/production/v3/en/competitions.json?api_key=YcAsBnwfaN6VSjPlm6dsj4Hjr5o9hd0c8s1c1g6p`;
+      }
+
+      // Tennis: All Women's Competitions
+      if (requestType === 'tennis-womens-competitions') {
+        return `https://api.sportradar.com/tennis/production/v3/en/competitions/sr%3Acompetition%3A2553/info.json?api_key=YcAsBnwfaN6VSjPlm6dsj4Hjr5o9hd0c8s1c1g6p`;
+      }
+
+      // Tennis: All Seasons
+      if (requestType === 'tennis-all-seasons') {
+        return `https://api.sportradar.com/tennis/production/v3/en/competitions/sr%3Acompetition%3A2555/seasons.json?api_key=YcAsBnwfaN6VSjPlm6dsj4Hjr5o9hd0c8s1c1g6p`;
+      }
+
+      // Tennis: All Season Data
+      if (requestType === 'tennis-all-season-data') {
+        return `https://api.sportradar.com/tennis/production/v3/en/seasons/sr%3Aseason%3A120983/info.json?api_key=YcAsBnwfaN6VSjPlm6dsj4Hjr5o9hd0c8s1c1g6p`;
+      }
     }
 
     return null;
@@ -496,12 +694,25 @@ const RequestsGenerator: React.FC = () => {
         label: config.label
       }));
     }
-    
-    if (formData.source === 'sportRadar') {
-      return sportRadarRequestTypesConfig.map(config => ({
+
+    if (formData.source === 'futbol24') {
+      return futbol24RequestTypesConfig.map(config => ({
         value: config.id,
         label: config.label
       }));
+    }
+    
+    if (formData.source === 'sportRadar') {
+      if (!formData.sportRadarCategory) {
+        return [];
+      }
+
+      return sportRadarRequestTypesConfig
+        .filter(config => config.sportCategory === formData.sportRadarCategory)
+        .map(config => ({
+          value: config.id,
+          label: config.label
+        }));
     }
     
     return [];
@@ -525,6 +736,10 @@ const RequestsGenerator: React.FC = () => {
     
     if (formData.source === 'dsg') {
       return dsgRequestTypesConfig.find(config => config.id === formData.requestType);
+    }
+
+    if (formData.source === 'futbol24') {
+      return futbol24RequestTypesConfig.find(config => config.id === formData.requestType);
     }
     
     if (formData.source === 'sportRadar') {
@@ -550,9 +765,13 @@ const RequestsGenerator: React.FC = () => {
     if (formData.source === 'dsg') {
       return formData.requestType;
     }
+
+    if (formData.source === 'futbol24') {
+      return formData.requestType;
+    }
     
     if (formData.source === 'sportRadar') {
-      return formData.requestType;
+      return formData.sportRadarCategory && formData.requestType;
     }
     
     return false;
@@ -598,13 +817,26 @@ const RequestsGenerator: React.FC = () => {
     { value: '365scores-ds', label: '365Scores DS' },
     { value: 'opta', label: 'Opta' },
     { value: 'dsg', label: 'DSG' },
-    { value: 'sportRadar', label: 'SportRadar' }
+    { value: 'sportRadar', label: 'SportRadar' },
+    { value: 'futbol24', label: 'Futbol24' }
   ];
 
   const environmentOptions = [
     { value: 'production', label: 'Production' },
-    { value: 'staging', label: 'Staging' },
-    { value: 'development', label: 'Development' }
+    { value: 'qa', label: 'QA' },
+    { value: 'qasanity', label: 'QA Sanity' },
+    { value: 'qa1', label: 'QA1' },
+    { value: 'qa2', label: 'QA2' },
+    { value: 'qa3', label: 'QA3' },
+    { value: 'qa4', label: 'QA4' },
+    { value: 'qa5', label: 'QA5' },
+    { value: 'qa6', label: 'QA6' },
+    { value: 'qa7', label: 'QA7' },
+    { value: 'qa8', label: 'QA8' },
+    { value: 'qa9', label: 'QA9' },
+    { value: 'qa10', label: 'QA10' },
+    { value: 'qa11', label: 'QA11' },
+    { value: 'qa12', label: 'QA12' }
   ];
 
   // Get request type options based on selected source
@@ -660,7 +892,7 @@ const RequestsGenerator: React.FC = () => {
                 placeholder="Select environment"
                 required
                 options={environmentOptions}
-                disabledOptions={['staging', 'development']}
+                disabledOptions={[]}
                 onChange={(value) => updateFormField('environment', value)}
               />
             </>
@@ -687,8 +919,8 @@ const RequestsGenerator: React.FC = () => {
               onChange={(value) => updateFormField('requestType', value)}
             />
           )}
-          
-          {formData.source === 'sportRadar' && (
+
+          {formData.source === 'futbol24' && (
             <FormField
               label="Request type"
               value={formData.requestType}
@@ -697,6 +929,31 @@ const RequestsGenerator: React.FC = () => {
               options={requestTypeOptions}
               onChange={(value) => updateFormField('requestType', value)}
             />
+          )}
+          
+          {formData.source === 'sportRadar' && (
+            <>
+              <FormField
+                label="Sport Type"
+                value={formData.sportRadarCategory}
+                placeholder="Select sport type"
+                required
+                options={sportRadarCategoryOptions}
+                disabledOptions={[]}
+                onChange={(value) => updateFormField('sportRadarCategory', value)}
+              />
+
+              {formData.sportRadarCategory && (
+                <FormField
+                  label="Request type"
+                  value={formData.requestType}
+                  placeholder="Select request"
+                  required
+                  options={requestTypeOptions}
+                  onChange={(value) => updateFormField('requestType', value)}
+                />
+              )}
+            </>
           )}
           
           {/* Render parameters in order: Unique, Shared, Core */}
