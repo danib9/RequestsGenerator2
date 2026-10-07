@@ -1923,10 +1923,10 @@ export const optaRequestTypesConfig: RequestTypeConfig[] = [
   {
     id: 'tournament-schedule',
     label: 'Tournament Schedule',
-    baseUrl: 'https://api.performfeeds.com/soccerdata/tournamentschedule/137iv2fgxqg281d2xtb1pl4oyi',
+    baseUrl: 'https://api.performfeeds.com/soccerdata/tournamentcalendar/5sz36p5b0qjv19gq5uvt37vyp',
     endpoint: '',
     parameters: [
-      { key: 'optaTournamentPID', label: 'Tournament Calendar PID', placeholder: 'Enter Tournament Calendar PID', type: 'text', category: 'unique', required: true }
+      { key: 'optaTournamentPID', label: 'Competition ID', placeholder: 'Enter Competition ID', type: 'text', category: 'unique', required: true }
       ]
     }
   ];
