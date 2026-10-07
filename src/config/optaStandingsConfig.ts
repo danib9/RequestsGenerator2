@@ -18,15 +18,15 @@ export const optaStandingsConfig: OptaStandingsRequestConfig[] = [
     id: 'standings',
     label: 'Standings',
     category: 'League',
-    baseUrl: 'https://api.performfeeds.com/soccerdata/standings/137iv2fgxqg281d2xtb1pl4oyi',
+    baseUrl: 'https://api.performfeeds.com/soccerdata/tournamentcalendar/5sz36p5b0qjv19gq5uvt37vyp',
     parameters: [
       {
-        key: 'tournamentCalendarID',
-        label: 'Tournament Calendar ID',
+        key: 'comp',
+        label: 'Competition ID',
         type: 'text',
         required: true,
         category: 'shared',
-        placeholder: 'Enter Tournament Calendar ID'
+        placeholder: 'Enter Competition ID'
       }
     ]
   }

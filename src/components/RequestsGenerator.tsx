@@ -116,24 +116,24 @@ const RequestsGenerator: React.FC = () => {
         return null;
       }
 
-      // For Opta Tournament Calendar, replace the Tournament PID in the URL
+      // For Opta Tournament Calendar (Standings), replace the Competition ID in the URL
       if (requestType === 'tournament-schedule') {
-        const optaTournamentPID = formData.optaTournamentPID;
-        if (!optaTournamentPID) {
+        const comp = formData.optaTournamentPID;
+        if (!comp) {
           return null;
         }
         
-        return `https://api.performfeeds.com/soccerdata/tournamentschedule/137iv2fgxqg281d2xtb1pl4oyi/${optaTournamentPID}?_fmt=json&_rt=b`;
+        return `https://api.performfeeds.com/soccerdata/tournamentcalendar/5sz36p5b0qjv19gq5uvt37vyp?_fmt=json&_rt=b&stages=yes&comp=${comp}`;
       }
       
-      // For Opta Standings, replace the Tournament Calendar ID in the URL
+      // For Opta Standings, replace the Competition ID in the URL
       if (requestType === 'standings') {
-        const tournamentCalendarID = formData.tournamentCalendarID;
-        if (!tournamentCalendarID) {
+        const comp = formData.comp;
+        if (!comp) {
           return null;
         }
         
-        return `https://api.performfeeds.com/soccerdata/standings/137iv2fgxqg281d2xtb1pl4oyi?_rt=b&_fmt=json&tmcl=${tournamentCalendarID}&type=total`;
+        return `https://api.performfeeds.com/soccerdata/tournamentcalendar/5sz36p5b0qjv19gq5uvt37vyp?_fmt=json&_rt=b&stages=yes&comp=${comp}`;
       }
       
       // For Opta Career History, replace the Person ID in the URL
